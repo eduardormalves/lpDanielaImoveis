@@ -1,0 +1,194 @@
+{
+  "codigo": "AP0223",
+  "titulo": "Apartamento de alto padrão no Maison Legacy Residence",
+  "subtitulo": "Mobiliado, andar alto e área social ampla no coração da Gleba Palhano",
+  "edificio": "Maison Legacy Residence",
+  "endereco": "Rua Eurico Hummig, 405",
+  "bairro": "Gleba Fazenda Palhano",
+  "cidade": "Londrina",
+  "uf": "PR",
+  "preco": 1960000,
+  "precoFormatado": "R$ 1.960.000",
+  "area": 183,
+  "suites": 3,
+  "quartos": 3,
+  "banheiros": 5,
+  "vagas": 2,
+  "andar": "Andar alto",
+  "descricao": "Apartamento completo e mobiliado em andar alto, com 183 m² de área privativa e ampla área social integrada à varanda gourmet. Cozinha planejada separada, com eletrodomésticos embutidos de alta qualidade. Três suítes com marcenaria sob medida, cinco banheiros e duas vagas de garagem. Vista privilegiada para o skyline da Gleba Palhano.",
+  "destaques": [
+    {
+      "icone": "sofa",
+      "titulo": "Ampla área social",
+      "texto": "Living, jantar e varanda gourmet totalmente integrados, com pé-direito generoso e iluminação em sanca."
+    },
+    {
+      "icone": "chef",
+      "titulo": "Cozinha planejada",
+      "texto": "Marcenaria sob medida com eletros embutidos de alta qualidade: forno, cooktop, coifa e geladeira French Door."
+    },
+    {
+      "icone": "bed",
+      "titulo": "3 suítes completas",
+      "texto": "Todas com armários planejados, ar-condicionado e banheiros com bancadas em mármore."
+    },
+    {
+      "icone": "building",
+      "titulo": "Andar alto",
+      "texto": "Vista aberta e desimpedida para o skyline da Gleba Palhano, com muita luz natural."
+    },
+    {
+      "icone": "wine",
+      "titulo": "Espaço gourmet",
+      "texto": "Churrasqueira, adega climatizada e bancada em pedra integradas ao living."
+    },
+    {
+      "icone": "car",
+      "titulo": "2 vagas de garagem",
+      "texto": "Vagas cobertas no subsolo do edifício, com acesso controlado."
+    },
+    {
+      "icone": "furniture",
+      "titulo": "Mobiliado",
+      "texto": "Entregue completo, pronto para morar, com móveis e decoração de design."
+    },
+    {
+      "icone": "pin",
+      "titulo": "Localização premium",
+      "texto": "Rua Eurico Hummig, 405 — a região mais valorizada de Londrina, próxima ao Catuaí Shopping e ao Lago Igapó."
+    }
+  ],
+  "fotos": [
+    {
+      "src": "/shared/img/01.webp",
+      "alt": "Living com sofá e vista para a cidade",
+      "cat": "social",
+      "titulo": "Living"
+    },
+    {
+      "src": "/shared/img/02.webp",
+      "alt": "Varanda gourmet integrada ao living",
+      "cat": "social",
+      "titulo": "Varanda gourmet"
+    },
+    {
+      "src": "/shared/img/03.webp",
+      "alt": "Sala de estar com iluminação em sanca",
+      "cat": "social",
+      "titulo": "Sala de estar"
+    },
+    {
+      "src": "/shared/img/04.webp",
+      "alt": "Sala de jantar integrada ao estar",
+      "cat": "social",
+      "titulo": "Estar e jantar"
+    },
+    {
+      "src": "/shared/img/05.webp",
+      "alt": "Área social com vista para o skyline",
+      "cat": "social",
+      "titulo": "Vista do living"
+    },
+    {
+      "src": "/shared/img/06.webp",
+      "alt": "Espaço gourmet com adega e churrasqueira",
+      "cat": "social",
+      "titulo": "Espaço gourmet"
+    },
+    {
+      "src": "/shared/img/07.webp",
+      "alt": "Sala de jantar com mesa redonda",
+      "cat": "social",
+      "titulo": "Sala de jantar"
+    },
+    {
+      "src": "/shared/img/08.webp",
+      "alt": "Jantar com cozinha ao fundo",
+      "cat": "social",
+      "titulo": "Jantar e cozinha"
+    },
+    {
+      "src": "/shared/img/09.webp",
+      "alt": "Cozinha planejada com eletros embutidos",
+      "cat": "cozinha",
+      "titulo": "Cozinha planejada"
+    },
+    {
+      "src": "/shared/img/10.webp",
+      "alt": "Cozinha com geladeira French Door",
+      "cat": "cozinha",
+      "titulo": "Cozinha"
+    },
+    {
+      "src": "/shared/img/15.webp",
+      "alt": "Suíte master com painel ripado",
+      "cat": "suites",
+      "titulo": "Suíte master"
+    },
+    {
+      "src": "/shared/img/18.webp",
+      "alt": "Suíte master com vista para a cidade",
+      "cat": "suites",
+      "titulo": "Suíte master"
+    },
+    {
+      "src": "/shared/img/17.webp",
+      "alt": "Suíte master com TV e armários espelhados",
+      "cat": "suites",
+      "titulo": "Suíte master"
+    },
+    {
+      "src": "/shared/img/20.webp",
+      "alt": "Suíte com painel ripado e vista",
+      "cat": "suites",
+      "titulo": "Suíte 2"
+    },
+    {
+      "src": "/shared/img/12.webp",
+      "alt": "Suíte com armários espelhados",
+      "cat": "suites",
+      "titulo": "Suíte 2"
+    },
+    {
+      "src": "/shared/img/13.webp",
+      "alt": "Suíte adaptada como home office",
+      "cat": "suites",
+      "titulo": "Suíte 3 / Home office"
+    },
+    {
+      "src": "/shared/img/16.webp",
+      "alt": "Home office com persianas",
+      "cat": "suites",
+      "titulo": "Suíte 3 / Home office"
+    },
+    {
+      "src": "/shared/img/14.webp",
+      "alt": "Banheiro da suíte master com bancada em mármore",
+      "cat": "banheiros",
+      "titulo": "Banheiro master"
+    },
+    {
+      "src": "/shared/img/11.webp",
+      "alt": "Banheiro de suíte com box de vidro",
+      "cat": "banheiros",
+      "titulo": "Banheiro suíte"
+    },
+    {
+      "src": "/shared/img/19.webp",
+      "alt": "Lavabo com revestimento 3D",
+      "cat": "banheiros",
+      "titulo": "Lavabo"
+    }
+  ],
+  "corretora": {
+    "nome": "Daniela Ribeiro Imóveis",
+    "creci": "CRECI F28998",
+    "telefone": "(43) 99995-9080",
+    "whatsapp": "5543999959080",
+    "site": "https://www.danielaribeiroimoveis.com.br",
+    "logo": "/shared/img/logo.png",
+    "logoMark": "/shared/img/logo-mark.png",
+    "logoWhite": "/shared/img/logo-white.png",
+    "logoDark": "/shared/img/logo-dark.png"
+  }
+}
