@@ -30,7 +30,7 @@
     document.body.classList.add('is-ready');
     loader.classList.add('is-done');
 
-    const tl = gsap.timeline({ delay: 0.4, defaults: { ease: 'expo.out' } });
+    const tl = gsap.timeline({ delay: 0.15, defaults: { ease: 'expo.out' } });
     tl.to(heroImg, { opacity: 1, scale: 1, duration: 2.4, ease: 'power2.out' }, 0)
       .to('.hero__eyebrow', { opacity: 1, duration: 1 }, 0.4)
       .to('.hero__title .line > span', { y: 0, duration: 1.4, stagger: 0.12 }, 0.5)
@@ -43,11 +43,19 @@
     bar.style.width = '100%';
     introHero();
   } else {
+    // O preloader só cobre o carregamento real da foto do hero (teto de 1,2 s
+    // para não segurar a página em conexão lenta); o contador é rápido.
+    const heroReady = new Promise((resolve) => {
+      if (heroImg.complete) return resolve();
+      heroImg.addEventListener('load', resolve, { once: true });
+      heroImg.addEventListener('error', resolve, { once: true });
+      setTimeout(resolve, 1200);
+    });
     const obj = { v: 0 };
     gsap.to(obj, {
-      v: 100, duration: 1.8, ease: 'power2.inOut',
+      v: 100, duration: 0.6, ease: 'power2.out',
       onUpdate: () => { count.textContent = Math.round(obj.v); bar.style.width = `${obj.v}%`; },
-      onComplete: introHero,
+      onComplete: () => heroReady.then(introHero),
     });
   }
 
