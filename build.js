@@ -38,20 +38,26 @@ fs.mkdirSync(DIST, { recursive: true });
 // Assets compartilhados (fotos, logos)
 copy(path.join(ROOT, 'shared', 'img'), path.join(DIST, 'shared', 'img'));
 
-// Índice
-const indexHtml = ejs.render(fs.readFileSync(path.join(ROOT, 'views', 'index.ejs'), 'utf8'), { landings, imovel });
-write(path.join(DIST, 'index.html'), rebase(indexHtml));
-
 // Cada landing: HTML + public/
-landings.forEach((lp) => {
+const renderLanding = (lp) => {
   const base = `/${lp.slug}`;
   const tpl = fs.readFileSync(path.join(ROOT, lp.dir, 'views', 'index.ejs'), 'utf8');
-  const html = ejs.render(tpl, { imovel, base, lp, waLink: whatsapp(), whatsapp, formatBRL }, {
+  return rebase(ejs.render(tpl, { imovel, base, lp, waLink: whatsapp(), whatsapp, formatBRL }, {
     filename: path.join(ROOT, lp.dir, 'views', 'index.ejs'),
-  });
-  write(path.join(DIST, lp.slug, 'index.html'), rebase(html));
+  }));
+};
+landings.forEach((lp) => {
+  write(path.join(DIST, lp.slug, 'index.html'), renderLanding(lp));
   copy(path.join(ROOT, lp.dir, 'public'), path.join(DIST, lp.slug));
 });
+
+// Raiz: com uma única landing, ela vira a página inicial; com várias, gera o índice
+if (landings.length === 1) {
+  write(path.join(DIST, 'index.html'), renderLanding(landings[0]));
+} else {
+  const indexHtml = ejs.render(fs.readFileSync(path.join(ROOT, 'views', 'index.ejs'), 'utf8'), { landings, imovel });
+  write(path.join(DIST, 'index.html'), rebase(indexHtml));
+}
 
 // Evita o Jekyll do GitHub Pages ignorar arquivos
 fs.writeFileSync(path.join(DIST, '.nojekyll'), '');

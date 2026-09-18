@@ -50,8 +50,14 @@ landings.forEach((lp) => {
   });
 });
 
-// Índice das landing pages
+// Raiz: com uma única landing, ela é servida direto; com várias, mostra o índice
+const renderLanding = (lp, res) => {
+  res.render(path.join(__dirname, lp.dir, 'views', 'index.ejs'), {
+    imovel, base: `/${lp.slug}`, lp, waLink: whatsapp(), whatsapp, formatBRL,
+  });
+};
 app.get('/', (req, res) => {
+  if (landings.length === 1) return renderLanding(landings[0], res);
   res.render('index', { landings, imovel });
 });
 

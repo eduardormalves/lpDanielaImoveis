@@ -9,7 +9,7 @@ npm install
 npm start
 ```
 
-Abra <http://localhost:3000> — a página inicial lista a landing page:
+Abra <http://localhost:3000> — com uma única landing, a raiz `/` já abre a própria página (e `/lp2` também funciona):
 
 | Rota   | Pasta                  | Estilo                       | Interações principais |
 |--------|------------------------|------------------------------|-----------------------|
