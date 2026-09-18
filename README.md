@@ -56,3 +56,12 @@ O workflow [.github/workflows/deploy.yml](.github/workflows/deploy.yml) roda aut
 URL publicada: <https://eduardormalves.github.io/lpDanielaImoveis/>
 
 > Para usar um domínio próprio, basta remover o `BASE_PATH` do workflow e configurar o domínio nas settings do Pages.
+
+## Deploy (Cloudflare Workers)
+
+O [wrangler.jsonc](wrangler.jsonc) publica a pasta `dist/` como site estático. No painel da Cloudflare, importe o repositório com:
+
+- Comando da build: `npm run build`
+- Comando de implantação: `npx wrangler deploy`
+
+Não defina `BASE_PATH` — na Cloudflare o site fica na raiz do domínio.

@@ -1,0 +1,11 @@
+// Cloudflare Workers: publica o site estático gerado em dist/ (npm run build)
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lpdanielaimoveis",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
