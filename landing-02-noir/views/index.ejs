@@ -46,7 +46,7 @@ const tour = [
     <div class="nav__links">
       <a href="#intro" data-hover>Imóvel</a>
       <a href="#galeria" data-hover>Galeria</a>
-      <a href="#tour" data-hover>Tour</a>
+      <a href="#tour" data-hover>Ambientes</a>
       <a href="#specs" data-hover>Ficha</a>
       <a href="#local" data-hover>Localização</a>
     </div>
@@ -59,7 +59,7 @@ const tour = [
     <nav class="menu__links">
       <a href="#intro"><small>01</small>Imóvel</a>
       <a href="#galeria"><small>02</small>Galeria</a>
-      <a href="#tour"><small>03</small>Tour</a>
+      <a href="#tour"><small>03</small>Ambientes</a>
       <a href="#specs"><small>04</small>Ficha</a>
       <a href="#local"><small>05</small>Localização</a>
     </nav>
@@ -126,33 +126,34 @@ const tour = [
     </div>
   </section>
 
-  <!-- ===== GALERIA HORIZONTAL ===== -->
+  <!-- ===== GALERIA EM LOOP ===== -->
   <section class="hgal" id="galeria">
-    <div class="hgal__pin">
-      <div class="hgal__head">
-        <p class="eyebrow">Área social</p>
-        <h2>Deslize pelos <em>ambientes</em></h2>
-      </div>
+    <div class="hgal__head">
+      <p class="eyebrow" data-reveal>Área social</p>
+      <h2 data-reveal>Deslize pelos <em>ambientes</em></h2>
+    </div>
+    <div class="hgal__viewport">
+      <!-- as fotos são duplicadas para o loop ser contínuo; a 2ª cópia é escondida de leitores de tela -->
       <div class="hgal__track" id="hgalTrack">
-        <% social.forEach((f, i) => { %>
-          <figure class="hgal__item" data-hover="view">
-            <img src="<%= f.src %>" alt="<%= f.alt %>" loading="lazy">
-            <figcaption><span>0<%= i + 1 %></span><%= f.titulo %></figcaption>
+        <% [...social, ...social].forEach((f, i) => { %>
+          <figure class="hgal__item" data-hover="view" data-index="<%= i % social.length %>"<%- i >= social.length ? ' aria-hidden="true"' : '' %>>
+            <img src="<%= f.src %>" alt="<%= i >= social.length ? '' : f.alt %>" loading="lazy" draggable="false">
+            <figcaption><span>0<%= (i % social.length) + 1 %></span><%= f.titulo %></figcaption>
           </figure>
         <% }) %>
-        <div class="hgal__end">
-          <p>Quer ver pessoalmente?</p>
-          <a href="<%= waLink %>" target="_blank" rel="noopener" class="btn-solid" data-hover><%- waIcon %> Agendar visita</a>
-        </div>
       </div>
-      <div class="hgal__progress"><span id="hgalProgress"></span></div>
+      <p class="hgal__hint" aria-hidden="true">Arraste para acelerar · toque na foto para ampliar</p>
+    </div>
+    <div class="hgal__end" data-reveal>
+      <p>Quer ver pessoalmente?</p>
+      <a href="<%= waLink %>" target="_blank" rel="noopener" class="btn-solid" data-hover><%- waIcon %> Agendar visita</a>
     </div>
   </section>
 
   <!-- ===== TOUR ===== -->
   <section class="tour" id="tour">
     <div class="tour__list">
-      <p class="eyebrow" data-reveal>Tour guiado</p>
+      <p class="eyebrow" data-reveal>Ambientes</p>
       <ul id="tourList">
         <% tour.forEach((t, i) => { %>
           <li class="tour__item <%= i === 0 ? 'is-active' : '' %>" data-index="<%= i %>" data-hover>
@@ -234,6 +235,23 @@ const tour = [
     <p><%= imovel.corretora.nome %> · <%= imovel.corretora.creci %> · <%= imovel.corretora.telefone %></p>
     <small>Ref. <%= imovel.codigo %> · Imagens meramente ilustrativas · Valores sujeitos a alteração.</small>
   </footer>
+
+  <!-- ===== LIGHTBOX (galeria) ===== -->
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Foto ampliada" aria-hidden="true">
+    <button class="lb__close" id="lbClose" aria-label="Fechar" data-hover>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <button class="lb__nav lb__nav--prev" id="lbPrev" aria-label="Foto anterior" data-hover>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+    </button>
+    <figure class="lb__fig" id="lbFig">
+      <img id="lbImg" src="" alt="" draggable="false">
+      <figcaption><span id="lbIdx"></span><em id="lbCap"></em></figcaption>
+    </figure>
+    <button class="lb__nav lb__nav--next" id="lbNext" aria-label="Próxima foto" data-hover>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
 
   <!-- ===== BARRA FIXA ===== -->
   <div class="stickybar" id="stickybar">

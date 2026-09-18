@@ -4,7 +4,7 @@ const path = require('path');
 const imovel = require('./shared/data/imovel.json');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -15,28 +15,12 @@ app.use('/shared', express.static(path.join(__dirname, 'shared'), { maxAge: '7d'
 // Cada landing page vive em sua própria pasta: views/ + public/
 const landings = [
   {
-    slug: 'lp1',
-    dir: 'landing-01-elegance',
-    nome: 'Elegance',
-    tema: 'Claro · Editorial',
-    descricao: 'Hero com slideshow Ken Burns, contadores animados, galeria filtrável com lightbox e formulário que abre o WhatsApp já preenchido.',
-    capa: '/shared/img/05.webp',
-  },
-  {
     slug: 'lp2',
     dir: 'landing-02-noir',
     nome: 'Noir',
     tema: 'Escuro · Cinematográfico',
-    descricao: 'Preloader, cursor customizado, galeria com scroll horizontal, tour por ambientes com crossfade e barra de CTA fixa.',
+    descricao: 'Preloader, cursor customizado, galeria em loop infinito, navegação por ambientes com crossfade e barra de CTA fixa.',
     capa: '/shared/img/06.webp',
-  },
-  {
-    slug: 'lp3',
-    dir: 'landing-03-story',
-    nome: 'Story',
-    tema: 'Scrollytelling · Conversão',
-    descricao: 'Narrativa guiada por scroll com imagem fixa, simulador de financiamento interativo, carrossel, FAQ e mapa.',
-    capa: '/shared/img/02.webp',
   },
 ];
 
@@ -66,7 +50,7 @@ landings.forEach((lp) => {
   });
 });
 
-// Índice com os 3 exemplos
+// Índice das landing pages
 app.get('/', (req, res) => {
   res.render('index', { landings, imovel });
 });

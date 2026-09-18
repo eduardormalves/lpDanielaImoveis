@@ -1,6 +1,6 @@
 # Landing Pages — Daniela Ribeiro Imóveis
 
-Três exemplos de landing page para o apartamento **AP0223 — Maison Legacy Residence** (Gleba Fazenda Palhano, Londrina/PR), construídos com **Node.js + Express + EJS**.
+Landing page para o apartamento **AP0223 — Maison Legacy Residence** (Gleba Fazenda Palhano, Londrina/PR), construída com **Node.js + Express + EJS**.
 
 ## Como rodar
 
@@ -9,46 +9,37 @@ npm install
 npm start
 ```
 
-Abra <http://localhost:3000> — a página inicial lista os três exemplos:
+Abra <http://localhost:3000> — a página inicial lista a landing page:
 
 | Rota   | Pasta                  | Estilo                       | Interações principais |
 |--------|------------------------|------------------------------|-----------------------|
-| `/lp1` | `landing-01-elegance/` | Claro · editorial            | Hero com slideshow Ken Burns, contadores animados, galeria filtrável + lightbox (teclado/swipe), parallax, formulário que abre o WhatsApp já preenchido |
-| `/lp2` | `landing-02-noir/`     | Escuro · cinematográfico     | Preloader, cursor customizado, título com máscara, galeria com scroll horizontal (GSAP ScrollTrigger), tour por ambientes com crossfade e auto-avanço, marquee, accordion, barra de CTA fixa |
-| `/lp3` | `landing-03-story/`    | Scrollytelling · conversão   | Narrativa guiada por scroll com imagem fixa, carrossel Swiper, simulador de financiamento (Tabela Price), FAQ, mapa, barra de progresso |
+| `/lp2` | `landing-02-noir/`     | Escuro · cinematográfico     | Preloader, cursor customizado, título com máscara, galeria em loop infinito, navegação por ambientes com crossfade e auto-avanço, marquee, accordion, barra de CTA fixa |
 
-Todas têm botão flutuante e CTAs que levam ao WhatsApp **+55 43 99995-9080** (`https://wa.me/5543999959080`) com mensagem pré-preenchida.
+A página tem botão flutuante e CTAs que levam ao WhatsApp **+55 43 99995-9080** (`https://wa.me/5543999959080`) com mensagem pré-preenchida.
 
 ## Estrutura
 
 ```
-├── server.js                # Express: rotas /, /lp1, /lp2, /lp3
-├── views/index.ejs          # Índice com os 3 exemplos
+├── server.js                # Express: rotas /, /lp2
+├── views/index.ejs          # Índice das landing pages
 ├── shared/
 │   ├── data/imovel.json     # Dados do imóvel, fotos, corretora (fonte única)
 │   └── img/                 # 20 fotos (.webp) + logos
-├── landing-01-elegance/
-│   ├── views/index.ejs
-│   └── public/{css,js}/
-├── landing-02-noir/
-│   ├── views/index.ejs
-│   └── public/{css,js}/
-└── landing-03-story/
+└── landing-02-noir/
     ├── views/index.ejs
     └── public/{css,js}/
 ```
 
 ## Personalizando
 
-- **Dados do imóvel / fotos / telefone:** edite `shared/data/imovel.json`. Todas as três páginas leem desse arquivo.
+- **Dados do imóvel / fotos / telefone:** edite `shared/data/imovel.json`. A página lê desse arquivo.
 - **Mensagem padrão do WhatsApp:** função `whatsapp()` em `server.js`.
 - **Adicionar uma nova landing:** crie a pasta com `views/index.ejs` + `public/`, e adicione a entrada no array `landings` em `server.js`.
 
 ## Dependências externas (CDN)
 
-- Google Fonts (Playfair Display/Inter, Cormorant Garamond/Manrope, Fraunces/DM Sans)
-- GSAP 3.12.5 + ScrollTrigger (LP2 e LP3)
-- Swiper 11.2.10 (LP3)
+- Google Fonts (Inter, Cormorant Garamond/Manrope)
+- GSAP 3.12.5 + ScrollTrigger
 - Google Maps Embed (sem chave de API)
 
 ## Deploy (GitHub Pages)

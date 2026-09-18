@@ -114,26 +114,110 @@
     });
   });
 
-  /* ---------- Galeria horizontal (pinned) ---------- */
+  /* ---------- Galeria: loop infinito arrastável ---------- */
+  // O trilho tem as fotos duplicadas; `x` é o deslocamento e volta a zero ao passar
+  // da metade, o que torna o loop invisível. Anda sozinho a BASE px/s; arrastar
+  // soma uma velocidade extra (com inércia) que decai de volta ao ritmo base.
+  const viewport = $('.hgal__viewport');
   const track = $('#hgalTrack');
-  const progress = $('#hgalProgress');
-  let hgalST;
-  const buildHgal = () => {
-    if (hgalST) { hgalST.kill(); gsap.set(track, { x: 0 }); }
-    if (!isDesktop() || reduced) return;
-    const dist = track.scrollWidth - window.innerWidth + 96;
-    hgalST = gsap.to(track, {
-      x: -dist, ease: 'none',
-      scrollTrigger: {
-        trigger: '.hgal', start: 'top top', end: () => `+=${dist}`,
-        pin: '.hgal__pin', scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true,
-        onUpdate: (self) => (progress.style.width = `${self.progress * 100}%`),
-      },
-    }).scrollTrigger;
-  };
-  buildHgal();
+  const BASE = reduced ? 0 : 70;
+  let half = 0, x = 0, vel = 0, dragging = false, moved = false;
+  let lastX = 0, lastT = 0, startX = 0, downFig = null;
+
+  const measure = () => { half = track.scrollWidth / 2; };
+  measure();
+  window.addEventListener('load', measure);
   let rt;
-  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { buildHgal(); ScrollTrigger.refresh(); }, 200); });
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { measure(); ScrollTrigger.refresh(); }, 200); });
+
+  gsap.ticker.add((t, dtMs) => {
+    const dt = Math.min(dtMs, 50) / 1000;
+    if (!dragging) {
+      x += (BASE + vel) * dt;
+      vel *= Math.exp(-2.2 * dt); // inércia: some em ~1,5 s
+      if (Math.abs(vel) < 1) vel = 0;
+    }
+    if (half) x = ((x % half) + half) % half;
+    track.style.transform = `translate3d(${-x}px,0,0)`;
+  });
+
+  viewport.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0) return;
+    dragging = true; moved = false; vel = 0;
+    startX = lastX = e.clientX; lastT = e.timeStamp;
+    downFig = e.target.closest('.hgal__item');
+    viewport.setPointerCapture(e.pointerId);
+    viewport.classList.add('is-dragging');
+  });
+  viewport.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - lastX;
+    const dt = Math.max(e.timeStamp - lastT, 1) / 1000;
+    if (Math.abs(e.clientX - startX) > 6) moved = true;
+    x -= dx;
+    vel = gsap.utils.clamp(-3500, 3500, (-dx / dt) * 0.6 + vel * 0.4); // suaviza a velocidade do ponteiro
+    lastX = e.clientX; lastT = e.timeStamp;
+  });
+  const endDrag = (e) => {
+    if (!dragging) return;
+    dragging = false;
+    viewport.classList.remove('is-dragging');
+    // soltou sem arrastar = clique na foto
+    if (!moved && downFig && e.type === 'pointerup') openLb(Number(downFig.dataset.index));
+    downFig = null;
+  };
+  viewport.addEventListener('pointerup', endDrag);
+  viewport.addEventListener('pointercancel', endDrag);
+
+  /* ---------- Lightbox da galeria ---------- */
+  const photos = $$('.hgal__item:not([aria-hidden])').map((f) => ({
+    src: $('img', f).src, alt: $('img', f).alt, titulo: $('figcaption', f).lastChild.textContent.trim(),
+  }));
+  const lb = $('#lb');
+  const lbImg = $('#lbImg');
+  const lbCap = $('#lbCap');
+  const lbIdx = $('#lbIdx');
+  let lbCur = 0;
+
+  const showLb = (i) => {
+    lbCur = (i + photos.length) % photos.length;
+    const p = photos[lbCur];
+    lbImg.src = p.src; lbImg.alt = p.alt;
+    lbCap.textContent = p.titulo;
+    lbIdx.textContent = `${String(lbCur + 1).padStart(2, '0')} / ${String(photos.length).padStart(2, '0')}`;
+  };
+  const openLb = (i) => {
+    showLb(i);
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    $('#lbClose').focus();
+  };
+  const closeLb = () => {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+  $('#lbClose').addEventListener('click', closeLb);
+  $('#lbPrev').addEventListener('click', () => showLb(lbCur - 1));
+  $('#lbNext').addEventListener('click', () => showLb(lbCur + 1));
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); }); // clique no fundo fecha
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') showLb(lbCur - 1);
+    if (e.key === 'ArrowRight') showLb(lbCur + 1);
+  });
+  // swipe horizontal na foto ampliada
+  let swX = null;
+  const lbFig = $('#lbFig');
+  lbFig.addEventListener('pointerdown', (e) => { swX = e.clientX; });
+  lbFig.addEventListener('pointerup', (e) => {
+    if (swX === null) return;
+    const dx = e.clientX - swX; swX = null;
+    if (dx > 50) showLb(lbCur - 1);
+    else if (dx < -50) showLb(lbCur + 1);
+  });
 
   /* ---------- Tour por ambientes ---------- */
   const tourItems = $$('.tour__item');
