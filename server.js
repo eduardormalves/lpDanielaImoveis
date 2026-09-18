@@ -13,11 +13,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/shared', express.static(path.join(__dirname, 'shared'), { maxAge: '7d' }));
 
 // Cada landing page vive em sua própria pasta: views/ + public/
+// slug = caminho público: <edificio>/<código da ficha> — o código identifica o
+// imóvel sem expor andar/número do apartamento.
 const landings = [
   {
-    slug: 'lp2',
-    dir: 'landing-02-noir',
-    nome: 'Noir',
+    slug: 'maisonlegacy/ap0223',
+    dir: 'maisonlegacy-ap0223',
+    nome: 'Maison Legacy · AP0223',
     tema: 'Escuro · Cinematográfico',
     descricao: 'Preloader, cursor customizado, galeria em loop infinito, navegação por ambientes com crossfade e barra de CTA fixa.',
     capa: '/shared/img/06.webp',
@@ -50,22 +52,17 @@ landings.forEach((lp) => {
   });
 });
 
-// Raiz: com uma única landing, ela é servida direto; com várias, mostra o índice
-const renderLanding = (lp, res) => {
-  res.render(path.join(__dirname, lp.dir, 'views', 'index.ejs'), {
-    imovel, base: `/${lp.slug}`, lp, waLink: whatsapp(), whatsapp, formatBRL,
-  });
-};
+// Raiz: página neutra (logo + contato), sem listar imóveis — as landings são
+// divulgadas só pelo link direto
 app.get('/', (req, res) => {
-  if (landings.length === 1) return renderLanding(landings[0], res);
-  res.render('index', { landings, imovel });
+  res.render('index', { imovel, waLink: whatsapp('Olá, Daniela! Gostaria de mais informações.') });
 });
 
 // Só sobe o servidor quando executado diretamente (build.js importa este módulo)
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`\n✔ Servidor rodando em http://localhost:${PORT}\n`);
-    landings.forEach((lp) => console.log(`  • ${lp.nome.padEnd(9)} → http://localhost:${PORT}/${lp.slug}`));
+    landings.forEach((lp) => console.log(`  • ${lp.nome} → http://localhost:${PORT}/${lp.slug}`));
     console.log('');
   });
 }

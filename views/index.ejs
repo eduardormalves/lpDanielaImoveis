@@ -3,60 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Pages — <%= imovel.corretora.nome %></title>
+  <meta name="robots" content="noindex">
+  <title><%= imovel.corretora.nome %></title>
   <link rel="icon" href="<%= imovel.corretora.logoMark %>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Inter,system-ui,sans-serif;background:#0f1115;color:#e8e8ea;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:64px 24px}
-    header{text-align:center;max-width:720px;margin-bottom:48px}
-    header img{height:64px;margin-bottom:20px;filter:brightness(0) invert(1)}
-    h1{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
-    p{color:#9a9ca3;line-height:1.6}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1100px;width:100%}
-    .card{background:#171a21;border:1px solid #262a33;border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s}
-    .card:hover{transform:translateY(-6px);border-color:#c9a962}
-    .card .thumb{aspect-ratio:16/10;overflow:hidden;position:relative}
-    .card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
-    .card:hover .thumb img{transform:scale(1.06)}
-    .card .thumb span{position:absolute;top:14px;left:14px;background:rgba(15,17,21,.75);backdrop-filter:blur(6px);padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-    .card .body{padding:22px}
-    .card h2{font-size:22px;margin-bottom:6px}
-    .card .tema{color:#c9a962;font-size:13px;font-weight:600;margin-bottom:12px}
-    .card p{font-size:14px}
-    .card .go{margin-top:18px;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:#fff}
-    .card .go svg{transition:transform .3s}
-    .card:hover .go svg{transform:translateX(4px)}
-    footer{margin-top:56px;color:#5f636d;font-size:13px;text-align:center}
+    body{font-family:Manrope,system-ui,sans-serif;background:#0b0b0c;color:#f3efe8;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;-webkit-font-smoothing:antialiased}
+    img{height:72px;margin-bottom:32px;opacity:.95}
+    h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-size:clamp(30px,5vw,48px);line-height:1.1;margin-bottom:12px}
+    h1 em{font-style:italic;color:#d6b982}
+    p{color:#a8a39a;max-width:38ch;line-height:1.6;margin-bottom:36px}
+    .actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;color:inherit;border:1px solid rgba(243,239,232,.2);transition:background .3s,color .3s,transform .3s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn--wa{background:#25d366;border-color:#25d366;color:#fff}
+    .btn--line:hover{background:#f3efe8;color:#0b0b0c}
+    .btn svg{width:18px;height:18px}
+    footer{margin-top:64px;color:#5f636d;font-size:12px;letter-spacing:.08em}
   </style>
 </head>
 <body>
-  <header>
-    <img src="<%= imovel.corretora.logo %>" alt="<%= imovel.corretora.nome %>">
-    <h1>Landing page</h1>
-    <p><%= imovel.titulo %> · <%= imovel.area %> m² · <%= imovel.suites %> suítes · <%= imovel.precoFormatado %></p>
-  </header>
-
-  <div class="grid">
-    <% landings.forEach((lp, i) => { %>
-      <a class="card" href="/<%= lp.slug %>">
-        <div class="thumb">
-          <img src="<%= lp.capa %>" alt="">
-          <span>Exemplo 0<%= i + 1 %></span>
-        </div>
-        <div class="body">
-          <h2><%= lp.nome %></h2>
-          <div class="tema"><%= lp.tema %></div>
-          <p><%= lp.descricao %></p>
-          <span class="go">Abrir landing page
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </span>
-        </div>
-      </a>
-    <% }) %>
+  <img src="<%= imovel.corretora.logoWhite %>" alt="<%= imovel.corretora.nome %>">
+  <h1>Apresentações <em>exclusivas</em> de imóveis</h1>
+  <p>Cada imóvel tem uma página própria, enviada diretamente pela Daniela. Quer conhecer as oportunidades disponíveis?</p>
+  <div class="actions">
+    <a class="btn btn--wa" href="<%= waLink %>" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 18.3c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.3 8.3 0 1 1 12 20.3"/></svg>
+      Falar no WhatsApp
+    </a>
+    <a class="btn btn--line" href="<%= imovel.corretora.site %>" target="_blank" rel="noopener">Ver o site</a>
   </div>
-
   <footer><%= imovel.corretora.nome %> · <%= imovel.corretora.creci %> · <%= imovel.corretora.telefone %></footer>
 </body>
 </html>

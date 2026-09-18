@@ -23,13 +23,15 @@ const write = (file, html) => {
   fs.writeFileSync(file, html);
 };
 
-// Reescreve caminhos absolutos ("/shared/…", "/lp1/…") para incluir o BASE_PATH
+// Reescreve caminhos absolutos ("/shared/…", "/<slug>/…") para incluir o BASE_PATH
+const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const slugs = landings.map((lp) => esc(lp.slug)).join('|');
 const rebase = (html) => {
   if (!BASE) return html;
   return html
     .replace(/(["'(])\/shared\//g, `$1${BASE}/shared/`)
-    .replace(/(["'])\/(lp\d)\//g, `$1${BASE}/$2/`)
-    .replace(/href="\/(lp\d)"/g, `href="${BASE}/$1/"`);
+    .replace(new RegExp(`(["'])/(${slugs})/`, 'g'), `$1${BASE}/$2/`)
+    .replace(new RegExp(`href="/(${slugs})"`, 'g'), `href="${BASE}/$1/"`);
 };
 
 rimraf(DIST);
@@ -51,13 +53,11 @@ landings.forEach((lp) => {
   copy(path.join(ROOT, lp.dir, 'public'), path.join(DIST, lp.slug));
 });
 
-// Raiz: com uma única landing, ela vira a página inicial; com várias, gera o índice
-if (landings.length === 1) {
-  write(path.join(DIST, 'index.html'), renderLanding(landings[0]));
-} else {
-  const indexHtml = ejs.render(fs.readFileSync(path.join(ROOT, 'views', 'index.ejs'), 'utf8'), { landings, imovel });
-  write(path.join(DIST, 'index.html'), rebase(indexHtml));
-}
+// Raiz: página neutra (logo + contato), sem listar imóveis
+const indexHtml = ejs.render(fs.readFileSync(path.join(ROOT, 'views', 'index.ejs'), 'utf8'), {
+  imovel, waLink: whatsapp('Olá, Daniela! Gostaria de mais informações.'),
+});
+write(path.join(DIST, 'index.html'), rebase(indexHtml));
 
 // Evita o Jekyll do GitHub Pages ignorar arquivos
 fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
