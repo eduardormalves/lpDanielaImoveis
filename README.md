@@ -24,7 +24,7 @@ A página tem botão flutuante e CTAs que levam ao WhatsApp **+55 43 99995-9080*
 ├── views/index.ejs          # Página neutra da raiz (logo + contato)
 ├── shared/
 │   ├── data/imovel.json     # Dados do imóvel, fotos, corretora (fonte única)
-│   └── img/                 # 20 fotos (.webp) + logos
+│   └── img/                 # 20 fotos (.webp) + logos + fotos da Daniela (recorte sem fundo)
 └── maisonlegacy-ap0223/     # <edifício>-<código da ficha>
     ├── views/index.ejs
     └── public/{css,js}/

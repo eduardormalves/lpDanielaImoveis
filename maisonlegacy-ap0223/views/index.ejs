@@ -49,6 +49,7 @@ const tour = [
       <a href="#tour" data-hover>Ambientes</a>
       <a href="#specs" data-hover>Ficha</a>
       <a href="#local" data-hover>Localização</a>
+      <a href="#consultora" data-hover>Consultora</a>
     </div>
     <a href="<%= waLink %>" target="_blank" rel="noopener" class="nav__cta" data-hover><%- waIcon %> <span>Falar no WhatsApp</span></a>
     <button class="nav__burger" id="burger" aria-label="Abrir menu" aria-expanded="false" data-hover><span></span><span></span></button>
@@ -62,8 +63,13 @@ const tour = [
       <a href="#tour"><small>03</small>Ambientes</a>
       <a href="#specs"><small>04</small>Ficha</a>
       <a href="#local"><small>05</small>Localização</a>
+      <a href="#consultora"><small>06</small>Consultora</a>
     </nav>
     <div class="menu__foot">
+      <div class="menu__who">
+        <img src="<%= imovel.corretora.avatar %>" alt="">
+        <div><b><%= imovel.corretora.pessoa %></b><small><%= imovel.corretora.tagline %></small></div>
+      </div>
       <a href="<%= waLink %>" target="_blank" rel="noopener" class="btn-solid"><%- waIcon %> Falar no WhatsApp</a>
       <p><%= imovel.precoFormatado %> · <%= imovel.area %> m² · <%= imovel.suites %> suítes</p>
     </div>
@@ -217,6 +223,29 @@ const tour = [
     </div>
   </section>
 
+  <!-- ===== CONSULTORA ===== -->
+  <section class="quem" id="consultora">
+    <div class="quem__photo" data-reveal>
+      <span class="quem__frame"></span>
+      <span class="quem__glow"></span>
+      <img src="<%= imovel.corretora.foto %>" alt="<%= imovel.corretora.pessoa %>, consultora imobiliária" loading="lazy">
+    </div>
+    <div class="quem__text">
+      <p class="eyebrow" data-reveal>Quem apresenta este imóvel</p>
+      <h2 data-reveal>Daniela <em>Ribeiro</em></h2>
+      <p class="quem__tagline" data-reveal><%= imovel.corretora.tagline %></p>
+      <div class="quem__stat" data-reveal>
+        <b><%= imovel.corretora.anos %></b>
+        <span>anos no alto padrão<br>residencial</span>
+      </div>
+      <p class="quem__bio" data-reveal><%= imovel.corretora.bio %></p>
+      <div class="quem__actions" data-reveal>
+        <a href="<%= whatsapp('Olá, Daniela! Vi a página do ' + imovel.edificio + ' (' + imovel.codigo + ') e gostaria de conversar.') %>" target="_blank" rel="noopener" class="btn-solid" data-hover><%- waIcon %> Falar com a Daniela</a>
+        <span><%= imovel.corretora.telefone %><small><%= imovel.corretora.creci %></small></span>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== CTA ===== -->
   <section class="final" id="contato">
     <div class="final__bg"><img src="<%= imovel.fotos[1].src %>" alt="" id="finalImg"></div>
@@ -232,6 +261,7 @@ const tour = [
 
   <footer class="footer">
     <img src="<%= imovel.corretora.logoWhite %>" alt="<%= imovel.corretora.nome %>">
+    <p class="footer__tag"><%= imovel.corretora.tagline %> · <%= imovel.corretora.experiencia %></p>
     <p><%= imovel.corretora.nome %> · <%= imovel.corretora.creci %> · <%= imovel.corretora.telefone %></p>
     <small>Ref. <%= imovel.codigo %> · Imagens meramente ilustrativas · Valores sujeitos a alteração.</small>
   </footer>
@@ -255,9 +285,10 @@ const tour = [
 
   <!-- ===== BARRA FIXA ===== -->
   <div class="stickybar" id="stickybar">
+    <img class="stickybar__avatar" src="<%= imovel.corretora.avatar %>" alt="">
     <div class="stickybar__info">
       <strong><%= imovel.precoFormatado %></strong>
-      <span><%= imovel.area %> m² · <%= imovel.suites %> suítes · <%= imovel.vagas %> vagas</span>
+      <span><%= imovel.area %> m² · <%= imovel.suites %> suítes<i class="stickybar__more"> · <%= imovel.vagas %> vagas</i></span>
     </div>
     <a href="<%= waLink %>" target="_blank" rel="noopener" class="btn-solid" data-hover><%- waIcon %> WhatsApp</a>
   </div>
