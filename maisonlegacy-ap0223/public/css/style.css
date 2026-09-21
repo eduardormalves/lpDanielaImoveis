@@ -245,8 +245,8 @@ body.is-ready .nav { transform: none; opacity: 1; }
 /* ---------- Consultora + CTA final ---------- */
 .final { display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(32px, 6vw, 96px); align-items: end; padding: clamp(96px, 12vw, 180px) var(--pad) 0; background: var(--bg-2); overflow: hidden; }
 .final__photo { position: relative; width: 100%; max-width: 520px; margin: 0 auto; }
-/* a foto já vem com o fundo na cor da seção (#121214); o mask só esvanece a base */
-.final__photo img { width: 100%; height: auto; -webkit-mask-image: linear-gradient(to bottom, #000 86%, transparent); mask-image: linear-gradient(to bottom, #000 86%, transparent); }
+/* a foto já vem com o fundo na cor da seção (#121214) e com a base esvanecida */
+.final__photo img { width: 100%; height: auto; }
 .final__content { padding-bottom: clamp(64px, 8vw, 120px); }
 .final__content h2 { font-size: clamp(40px, 5.2vw, 78px); margin-bottom: 36px; }
 .final__who { display: flex; flex-wrap: wrap; align-items: center; gap: 28px 40px; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 28px; }
@@ -308,10 +308,9 @@ body.is-ready .nav { transform: none; opacity: 1; }
   .hero__meta-item--price { flex-basis: 100%; border-right: 0; border-top: 1px solid var(--line); margin-left: 0; }
   .hero__scroll { display: none; }
   .intro__grid, .local { grid-template-columns: 1fr; }
-  /* mobile: foto no topo, largura total, enquadrada do rosto aos braços, esvanecendo para o texto */
+  /* mobile: foto no topo, largura total, esvanecendo para o texto */
   .final { grid-template-columns: 1fr; gap: 0; padding: 40px 0 48px; }
-  .final__photo { order: 1; max-width: none; aspect-ratio: 4 / 5; overflow: hidden; margin-bottom: -24px; }
-  .final__photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; -webkit-mask-image: linear-gradient(to bottom, #000 68%, transparent); mask-image: linear-gradient(to bottom, #000 68%, transparent); }
+  .final__photo { order: 1; max-width: none; margin-bottom: -56px; }
   .final__content { order: 2; padding: 0 var(--pad); }
   .final__content h2 { font-size: clamp(36px, 10vw, 48px); }
   .final__name { padding-left: 0; border-left: 0; }
