@@ -308,9 +308,10 @@ body.is-ready .nav { transform: none; opacity: 1; }
   .hero__meta-item--price { flex-basis: 100%; border-right: 0; border-top: 1px solid var(--line); margin-left: 0; }
   .hero__scroll { display: none; }
   .intro__grid, .local { grid-template-columns: 1fr; }
-  /* mobile: foto no topo, largura total, esvanecendo para o texto */
+  /* mobile: foto no topo, largura total, "apoiada" numa linha fina; texto abaixo */
   .final { grid-template-columns: 1fr; gap: 0; padding: 40px 0 48px; }
-  .final__photo { order: 1; max-width: none; margin-bottom: -56px; }
+  .final__photo { order: 1; max-width: 420px; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
+  .final__photo img { display: block; }
   .final__content { order: 2; padding: 0 var(--pad); }
   .final__content h2 { font-size: clamp(36px, 10vw, 48px); }
   .final__name { padding-left: 0; border-left: 0; }
