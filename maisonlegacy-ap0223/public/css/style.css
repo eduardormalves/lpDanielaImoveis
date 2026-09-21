@@ -245,10 +245,8 @@ body.is-ready .nav { transform: none; opacity: 1; }
 /* ---------- Consultora + CTA final ---------- */
 .final { display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(32px, 6vw, 96px); align-items: end; padding: clamp(96px, 12vw, 180px) var(--pad) 0; background: var(--bg-2); overflow: hidden; }
 .final__photo { position: relative; width: 100%; max-width: 520px; margin: 0 auto; }
-.final__photo img { position: relative; z-index: 2; width: 100%; height: auto; -webkit-mask-image: linear-gradient(to bottom, #000 86%, transparent); mask-image: linear-gradient(to bottom, #000 86%, transparent); }
-/* moldura fina e brilho champanhe atrás do recorte */
-.final__frame { position: absolute; z-index: 0; inset: 14% 8% 0; border: 1px solid var(--line); border-bottom: 0; }
-.final__glow { position: absolute; z-index: 1; left: -10%; right: -10%; bottom: 0; height: 80%; background: radial-gradient(ellipse at 50% 100%, rgba(214,185,130,.26), transparent 62%); }
+/* a foto já vem com o fundo na cor da seção (#121214); o mask só esvanece a base */
+.final__photo img { width: 100%; height: auto; -webkit-mask-image: linear-gradient(to bottom, #000 86%, transparent); mask-image: linear-gradient(to bottom, #000 86%, transparent); }
 .final__content { padding-bottom: clamp(64px, 8vw, 120px); }
 .final__content h2 { font-size: clamp(40px, 5.2vw, 78px); margin-bottom: 36px; }
 .final__who { display: flex; flex-wrap: wrap; align-items: center; gap: 28px 40px; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 28px; }
