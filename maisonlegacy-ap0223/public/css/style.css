@@ -308,9 +308,12 @@ body.is-ready .nav { transform: none; opacity: 1; }
   .hero__meta-item--price { flex-basis: 100%; border-right: 0; border-top: 1px solid var(--line); margin-left: 0; }
   .hero__scroll { display: none; }
   .intro__grid, .local { grid-template-columns: 1fr; }
-  .final { grid-template-columns: 1fr; gap: 0; padding-top: 72px; }
-  .final__content { order: 1; padding-bottom: 40px; }
-  .final__photo { order: 2; max-width: 380px; }
+  /* mobile: foto no topo, largura total, enquadrada do rosto aos braços, esvanecendo para o texto */
+  .final { grid-template-columns: 1fr; gap: 0; padding: 40px 0 48px; }
+  .final__photo { order: 1; max-width: none; aspect-ratio: 4 / 5; overflow: hidden; margin-bottom: -24px; }
+  .final__photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; -webkit-mask-image: linear-gradient(to bottom, #000 68%, transparent); mask-image: linear-gradient(to bottom, #000 68%, transparent); }
+  .final__content { order: 2; padding: 0 var(--pad); }
+  .final__content h2 { font-size: clamp(36px, 10vw, 48px); }
   .final__name { padding-left: 0; border-left: 0; }
   .intro__num { position: static; }
   .hgal__head { margin-bottom: 28px; }
