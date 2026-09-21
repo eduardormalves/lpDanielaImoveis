@@ -269,14 +269,6 @@
     });
   });
 
-  /* ---------- Parallax CTA final ---------- */
-  if (!reduced) {
-    gsap.fromTo('#finalImg', { yPercent: -10 }, {
-      yPercent: 5, ease: 'none',
-      scrollTrigger: { trigger: '.final', start: 'top bottom', end: 'bottom top', scrub: true },
-    });
-  }
-
   /* ---------- Sticky bar (aparece depois do hero, some no CTA final) ---------- */
   const sticky = $('#stickybar');
   ScrollTrigger.create({
