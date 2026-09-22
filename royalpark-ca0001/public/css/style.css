@@ -120,7 +120,8 @@ body.is-ready .nav { transform: none; opacity: 1; }
 /* ---------- Hero (mais baixo que o da AP0223) ---------- */
 .hero { position: relative; min-height: 92svh; display: flex; align-items: flex-end; padding: 110px var(--pad) 56px; overflow: hidden; color: #fff; --line: rgba(255,255,255,.22); --fg-2: rgba(255,255,255,.72); --champ: var(--brand-light); }
 .hero__bg { position: absolute; inset: 0; }
-.hero__bg img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); opacity: 0; }
+/* no celular a foto é cortada nas laterais: 28% mantém o brise e a porta no centro */
+.hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 28% 50%; transform: scale(1.15); opacity: 0; }
 /* a foto do hero é clara (gourmet ao sol), então o véu é um pouco mais forte
    que o da AP0223 para o texto branco continuar legível */
 .hero__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(47,39,36,.96) 0%, rgba(47,39,36,.48) 45%, rgba(47,39,36,.62) 100%); }
