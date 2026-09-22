@@ -32,7 +32,7 @@ const landings = [
     nome: 'Royal Park · CA0001',
     tema: 'Identidade Daniela Ribeiro · marrom #84716B',
     descricao: 'Versão compacta: hero, tour em vídeo, galeria em loop, ficha técnica e CTA, sem a seção de ambientes e sem accordion.',
-    capa: '/royalpark/ca0001/media/02.webp',
+    capa: '/royalpark/ca0001/media/fachada.webp',
   },
 ];
 

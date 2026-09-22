@@ -4,6 +4,7 @@
   "subtitulo": "Cinco suítes, elevador, piscina aquecida e energia solar no bairro Esperança",
   "edificio": "Royal Park Residence",
   "tipo": "Sobrado",
+  "capa": "/media/fachada.webp",
   "endereco": "Avenida Gil de Abreu Souza, 2001",
   "bairro": "Esperança",
   "cidade": "Londrina",
@@ -57,6 +58,11 @@
     }
   ],
   "fotos": [
+    {
+      "src": "/media/fachada.webp",
+      "alt": "Fachada da casa, com brise de madeira, muro em pedra e laje em balanço",
+      "titulo": "Fachada"
+    },
     {
       "src": "/media/01.webp",
       "alt": "Living integrado com painel em mármore, marcenaria amadeirada e sofás de couro",
