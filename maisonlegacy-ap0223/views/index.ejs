@@ -92,7 +92,7 @@ const tour = [
         <div class="hero__meta-item hero__meta-item--price"><span><%= imovel.precoFormatado %></span><small>valor de venda</small></div>
       </div>
       <a href="<%= whatsapp('Olá, Daniela! Vi a página do ' + imovel.edificio + ' (' + imovel.codigo + ') e quero agendar uma visita.') %>" target="_blank" rel="noopener" class="btn-line" data-hover>
-        <span>Agendar visita privada</span>
+        <span>Agendar visita exclusiva</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -225,7 +225,7 @@ const tour = [
     </div>
     <div class="final__content">
       <p class="eyebrow" data-reveal>Quem apresenta este imóvel</p>
-      <h2 class="lines-reveal">Agende uma visita<br>privada com a Daniela.</h2>
+      <h2 class="lines-reveal">Agende uma visita<br>exclusiva com a Daniela.</h2>
       <div class="final__who" data-reveal>
         <div class="final__stat"><b><%= imovel.corretora.anos %></b><span>anos no alto padrão<br>residencial</span></div>
         <div class="final__name"><b><%= imovel.corretora.pessoa %></b><span><%= imovel.corretora.tagline %></span></div>

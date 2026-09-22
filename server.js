@@ -20,7 +20,7 @@ const landings = [
     slug: 'maisonlegacy/ap0223',
     dir: 'maisonlegacy-ap0223',
     nome: 'Maison Legacy · AP0223',
-    tema: 'Escuro · Cinematográfico',
+    tema: 'Identidade Daniela Ribeiro · marrom #84716B',
     descricao: 'Preloader, cursor customizado, galeria em loop infinito, navegação por ambientes com crossfade e barra de CTA fixa.',
     capa: '/shared/img/06.webp',
   },

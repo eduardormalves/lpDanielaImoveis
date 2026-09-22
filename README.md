@@ -13,7 +13,7 @@ Abra <http://localhost:3000>. A raiz `/` é uma página neutra (logo + WhatsApp)
 
 | Rota                    | Pasta                  | Estilo                       | Interações principais |
 |-------------------------|------------------------|------------------------------|-----------------------|
-| `/maisonlegacy/ap0223/` | `maisonlegacy-ap0223/` | Escuro · cinematográfico     | Preloader, cursor customizado, título com máscara, galeria em loop infinito, navegação por ambientes com crossfade e auto-avanço, marquee, accordion, barra de CTA fixa |
+| `/maisonlegacy/ap0223/` | `maisonlegacy-ap0223/` | Identidade da marca (marrom #84716B + branco, fundo claro) | Preloader, cursor customizado, título com máscara, galeria em loop infinito, navegação por ambientes com crossfade e auto-avanço, marquee, accordion, barra de CTA fixa |
 
 A página tem botão flutuante e CTAs que levam ao WhatsApp **+55 43 99995-9080** (`https://wa.me/5543999959080`) com mensagem pré-preenchida.
 
