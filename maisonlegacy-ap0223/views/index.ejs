@@ -221,7 +221,9 @@ const tour = [
   <!-- ===== CONSULTORA + CTA FINAL ===== -->
   <section class="final" id="consultora">
     <div class="final__photo" data-reveal>
-      <img src="<%= imovel.corretora.foto %>" alt="<%= imovel.corretora.pessoa %>, consultora imobiliária" loading="lazy">
+      <img src="<%= imovel.corretora.foto %>" srcset="<%= imovel.corretora.fotoSrcset %>" sizes="(max-width: 860px) 400px, 600px"
+           width="<%= imovel.corretora.fotoW %>" height="<%= imovel.corretora.fotoH %>"
+           alt="<%= imovel.corretora.pessoa %>, consultora imobiliária" loading="lazy" decoding="async">
     </div>
     <div class="final__content">
       <p class="eyebrow" data-reveal>Quem apresenta este imóvel</p>

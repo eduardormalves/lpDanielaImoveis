@@ -13,5 +13,8 @@
   "anos": 14,
   "experiencia": "Há 14 anos no alto padrão residencial",
   "bio": "Consultoria imobiliária personalizada, há 14 anos dedicada ao alto padrão residencial. Cada apresentação, como esta, é preparada e enviada pessoalmente. Do primeiro contato à visita, o atendimento é direto com a Daniela.",
-  "foto": "/shared/img/daniela-light.webp"
+  "foto": "/shared/img/daniela-light.webp",
+  "fotoSrcset": "/shared/img/daniela-light-550.webp 550w, /shared/img/daniela-light-800.webp 800w, /shared/img/daniela-light.webp 1100w",
+  "fotoW": 1100,
+  "fotoH": 1430
 }

@@ -125,9 +125,6 @@ const foto = (i) => asset(imovel.fotos[i].src);
       <div class="intro__text">
         <h2 class="lines-reveal"><%= imovel.tipo %> completo, mobiliado<br>e pronto para morar.</h2>
         <p data-reveal><%= imovel.descricao %></p>
-        <div class="intro__tags" data-reveal>
-          <span>Elevador</span><span>Móveis Bontempo</span><span>Piscina aquecida</span><span>Energia fotovoltaica</span><span>Adega</span><span>Escritório</span>
-        </div>
       </div>
     </div>
   </section>
@@ -188,7 +185,6 @@ const foto = (i) => asset(imovel.fotos[i].src);
       <div class="spec" data-reveal><b><%= imovel.suites %></b><small>suítes</small></div>
       <div class="spec" data-reveal><b><%= imovel.banheiros %></b><small>banheiros</small></div>
       <div class="spec" data-reveal><b><%= imovel.vagas %></b><small>vagas</small></div>
-      <div class="spec" data-reveal><b>Sim</b><small>elevador</small></div>
     </div>
 
     <ul class="destaques">
@@ -221,7 +217,9 @@ const foto = (i) => asset(imovel.fotos[i].src);
   <!-- ===== CONSULTORA + CTA FINAL ===== -->
   <section class="final" id="consultora">
     <div class="final__photo" data-reveal>
-      <img src="<%= imovel.corretora.foto %>" alt="<%= imovel.corretora.pessoa %>, consultora imobiliária" loading="lazy">
+      <img src="<%= imovel.corretora.foto %>" srcset="<%= imovel.corretora.fotoSrcset %>" sizes="(max-width: 860px) 400px, 600px"
+           width="<%= imovel.corretora.fotoW %>" height="<%= imovel.corretora.fotoH %>"
+           alt="<%= imovel.corretora.pessoa %>, consultora imobiliária" loading="lazy" decoding="async">
     </div>
     <div class="final__content">
       <p class="eyebrow" data-reveal>Quem apresenta este imóvel</p>

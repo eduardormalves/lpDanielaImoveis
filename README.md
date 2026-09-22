@@ -25,9 +25,10 @@ Feita a partir do modelo da AP0223, com o mesmo layout e paleta, mas mais curta 
 - **saiu** a seção de navegação por ambientes (tela cheia com crossfade e auto-avanço);
 - **saiu** o accordion de destaques, que virou uma grade com os 8 destaques visíveis de uma vez;
 - **entrou** o bloco de **tour em vídeo**, em moldura vertical 9:16 sobre o marrom da marca;
+- a ficha não repete dado: a grade de números traz área, terreno, suítes, banheiros e vagas, e os destaques ao lado só falam do que não é número;
 - espaçamentos verticais menores (variável `--sec` no CSS).
 
-Resultado: ~17% mais curta que a AP0223 no desktop (5.8k vs 7.1k px) e ~6% no celular.
+Resultado: ~15% mais curta que a AP0223 no desktop (5.7k vs 6.7k px) e ~12% no celular.
 
 ## Estrutura
 
@@ -67,7 +68,11 @@ O `slug` vira o caminho público (`<empreendimento>/<código>`); use o código d
 
 ## Preparando as mídias
 
-Fotos: converter para `.webp` (qualidade ~80) e manter a largura máxima em torno de 1024 px. Vídeos: reencodar para H.264 com áudio AAC e `-movflags +faststart` (o tour do CA0001 ficou em 480×854, ~6 MB para 1 min 22). Vale conferir o final do arquivo, que às vezes traz telefone ou marca de terceiros.
+Fotos do imóvel: converter para `.webp` (qualidade ~80) e manter a largura máxima em torno de 1024 px.
+
+Foto da consultora: é o maior elemento da página raiz, então tem três tamanhos (550/800/1100 px) servidos por `srcset`, mais um `<link rel="preload">` no `<head>`. Numa tela de notebook o navegador baixa 39 KB em vez dos 121 KB do arquivo único de antes.
+
+Vídeos: reencodar para H.264 com áudio AAC e `-movflags +faststart`, **sem reescalar** (reamostrar borra a imagem de graça, já que a fonte costuma ser vertical de celular). O tour do CA0001 é `-crf 25 -preset veryslow` na resolução nativa 478×850: 12,7 MB para 1 min 22, indistinguível do original. Como o player usa `preload="none"`, esse peso só é baixado por quem aperta play. Vale conferir o final do arquivo, que às vezes traz telefone ou marca de terceiros.
 
 ## Dependências externas (CDN)
 

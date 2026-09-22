@@ -8,36 +8,48 @@
   <link rel="icon" href="<%= corretora.logoMark %>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+  <!-- a foto é o maior elemento da página (LCP): pede ela antes do CSS das fontes resolver -->
+  <link rel="preload" as="image" href="<%= corretora.foto %>" imagesrcset="<%= corretora.fotoSrcset %>" imagesizes="(max-width: 760px) 320px, 34vw" fetchpriority="high">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#f7f4f0;--bg-2:#efe9e3;--fg:#2f2724;--fg-2:#7d6f69;--champ:#84716b;--line:rgba(132,113,107,.28)}
+    /* --s: unidade de escala da página. Usa o MENOR entre largura e altura da
+       janela, senão em telas largas e baixas (notebook 1920x1080) o conteúdo
+       cresceria em vw e estouraria a altura. Todo tamanho abaixo é um múltiplo
+       dela, com clamp() segurando os extremos. */
+    :root{--bg:#f7f4f0;--bg-2:#efe9e3;--fg:#2f2724;--fg-2:#7d6f69;--champ:#84716b;--line:rgba(132,113,107,.28);
+          --s:min(1.08vw,1.8vh)}
     body{font-family:Manrope,system-ui,sans-serif;background:var(--bg-2);color:var(--fg);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
-    .card{flex:1;display:grid;grid-template-columns:1fr 1.1fr;align-items:end;gap:clamp(24px,5vw,80px);max-width:1100px;width:100%;margin:0 auto;padding:48px clamp(24px,6vw,64px) 0}
-    .photo{position:relative;max-width:460px;width:100%;margin:0 auto}
-    .photo img{width:100%;height:auto}
-    .text{padding-bottom:64px}
-    .logo{height:56px;margin-bottom:40px;opacity:.95}
-    .eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--champ);font-weight:600;margin-bottom:18px}
-    h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-size:clamp(40px,5.5vw,68px);line-height:1;margin-bottom:10px}
+    .card{flex:1;display:grid;grid-template-columns:1fr 1.15fr;align-items:end;gap:clamp(24px,5vw,104px);max-width:1560px;width:100%;margin:0 auto;padding:clamp(32px,4vh,64px) clamp(24px,5vw,72px) 0}
+    /* a foto é limitada pelos dois eixos: largura da coluna e altura da janela */
+    .photo{display:flex;justify-content:center;align-items:flex-end;max-width:clamp(300px,34vw,700px);width:100%;margin:0 auto}
+    .photo img{max-width:100%;max-height:min(80vh,1100px);width:auto;height:auto}
+    .text{padding-bottom:clamp(36px,calc(var(--s)*3.6),80px)}
+    .logo{height:clamp(44px,calc(var(--s)*5.2),92px);margin-bottom:clamp(28px,calc(var(--s)*2.6),56px);opacity:.95}
+    .eyebrow{font-size:clamp(11px,calc(var(--s)*.95),16px);letter-spacing:.3em;text-transform:uppercase;color:var(--champ);font-weight:600;margin-bottom:clamp(14px,calc(var(--s)*1.2),26px)}
+    h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-size:clamp(40px,calc(var(--s)*6.2),112px);line-height:1;margin-bottom:.14em}
     h1 em{font-style:italic;color:var(--champ)}
-    .tag{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(20px,2.4vw,28px);color:var(--fg-2);margin-bottom:28px}
-    .exp{display:flex;align-items:center;gap:18px;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:28px}
-    .exp b{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-size:64px;line-height:.9;color:var(--champ)}
-    .exp span{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-2);line-height:1.7}
-    p.lead{color:var(--fg-2);line-height:1.6;max-width:44ch;margin-bottom:32px}
-    .actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;color:inherit;border:1px solid var(--line);transition:background .3s,color .3s,transform .3s}
+    .tag{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(20px,calc(var(--s)*2.5),44px);color:var(--fg-2);margin-bottom:clamp(22px,calc(var(--s)*1.9),42px)}
+    .exp{display:flex;align-items:center;gap:clamp(14px,calc(var(--s)*1.2),26px);padding:clamp(16px,calc(var(--s)*1.4),30px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:clamp(22px,calc(var(--s)*1.9),42px)}
+    .exp b{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-size:clamp(52px,calc(var(--s)*5.8),104px);line-height:.9;color:var(--champ)}
+    .exp span{font-size:clamp(12px,calc(var(--s)*1),17px);letter-spacing:.2em;text-transform:uppercase;color:var(--fg-2);line-height:1.7}
+    p.lead{font-size:clamp(16px,calc(var(--s)*1.4),25px);color:var(--fg-2);line-height:1.6;max-width:46ch;margin-bottom:clamp(26px,calc(var(--s)*2.2),46px)}
+    .actions{display:flex;flex-wrap:wrap;gap:clamp(12px,calc(var(--s)*1),20px);align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:.7em;padding:.95em 1.85em;border-radius:999px;font-weight:600;font-size:clamp(14px,calc(var(--s)*1.15),20px);text-decoration:none;color:inherit;border:1px solid var(--line);transition:background .3s,color .3s,transform .3s}
     .btn:hover{transform:translateY(-2px)}
     .btn--wa{background:#25d366;border-color:#25d366;color:#fff}
     .btn--line:hover{background:var(--champ);border-color:var(--champ);color:#fff}
-    .btn svg{width:18px;height:18px}
-    footer{padding:22px;text-align:center;color:#fff;background:var(--champ);font-size:12px;letter-spacing:.08em}
-    @media (max-width:760px){.card{grid-template-columns:1fr;gap:0;padding-top:32px}.text{order:1;padding-bottom:36px}.photo{order:2;max-width:320px}.logo{height:44px;margin-bottom:28px}.exp b{font-size:52px}}
+    .btn svg{width:1.3em;height:1.3em}
+    footer{padding:clamp(18px,calc(var(--s)*1.5),32px);text-align:center;color:#fff;background:var(--champ);font-size:clamp(12px,calc(var(--s)*.95),17px);letter-spacing:.08em}
+    @media (max-width:760px){.card{grid-template-columns:1fr;gap:0;padding-top:32px}.text{order:1;padding-bottom:36px}.photo{order:2;max-width:320px}.photo img{max-height:none}.logo{height:44px;margin-bottom:28px}.exp b{font-size:52px}}
   </style>
 </head>
 <body>
   <main class="card">
-    <div class="photo"><img src="<%= corretora.foto %>" alt="<%= corretora.pessoa %>"></div>
+    <div class="photo">
+      <img src="<%= corretora.foto %>" srcset="<%= corretora.fotoSrcset %>" sizes="(max-width: 760px) 320px, 34vw"
+           width="<%= corretora.fotoW %>" height="<%= corretora.fotoH %>"
+           fetchpriority="high" decoding="async" alt="<%= corretora.pessoa %>">
+    </div>
     <div class="text">
       <img class="logo" src="<%= corretora.logoDark %>" alt="<%= corretora.nome %>">
       <p class="eyebrow">Apresentações exclusivas de imóveis</p>
