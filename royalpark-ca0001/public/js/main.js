@@ -36,8 +36,7 @@
     tl.to(heroImg, { opacity: 1, scale: 1, duration: 2.4, ease: 'power2.out' }, 0)
       .to('.hero__eyebrow', { opacity: 1, duration: 1 }, 0.4)
       .to('.hero__title .line > span', { y: 0, duration: 1.4, stagger: 0.12 }, 0.5)
-      .to('.hero__meta', { opacity: 1, duration: 1 }, 1.1)
-      .to('.hero .btn-line', { opacity: 1, duration: 1 }, 1.3);
+      .to('.hero__meta', { opacity: 1, duration: 1 }, 1.1);
   };
 
   if (reduced) {

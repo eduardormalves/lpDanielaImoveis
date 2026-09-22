@@ -136,12 +136,8 @@ body.is-ready .nav { transform: none; opacity: 1; }
 .hero__meta-item small { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--fg-2); }
 .hero__meta-item--price { margin-left: auto; margin-right: 0; padding-right: 0; }
 .hero__meta-item--price span { color: var(--champ); }
-.hero .btn-line { opacity: 0; }
-.hero__scroll { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 2; }
-.hero__scroll span { writing-mode: vertical-rl; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--fg-2); }
-.hero__scroll i { width: 1px; height: 40px; background: var(--line); position: relative; overflow: hidden; }
-.hero__scroll i::after { content: ''; position: absolute; inset: 0; background: var(--champ); animation: scrollLine 2s infinite; }
-@keyframes scrollLine { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+/* a ficha passou a ser o último bloco do hero: sem o botão abaixo, a margem viraria um vão */
+.hero__meta:last-child { margin-bottom: 0; }
 
 /* ---------- Marquee ---------- */
 .marquee { overflow: hidden; padding: 18px 0; background: var(--brand); color: #fff; }
@@ -313,7 +309,6 @@ body.is-ready .nav { transform: none; opacity: 1; }
   .hero__meta-item { padding: 14px 20px 14px 0; margin-right: 20px; }
   .hero__meta-item span { font-size: 26px; }
   .hero__meta-item--price { flex-basis: 100%; border-right: 0; border-top: 1px solid var(--line); margin-left: 0; }
-  .hero__scroll { display: none; }
   .intro__grid, .local { grid-template-columns: 1fr; }
   /* mobile: foto no topo, largura total, "apoiada" numa linha fina; texto abaixo */
   .final { grid-template-columns: 1fr; gap: 0; padding: 40px 0 48px; }

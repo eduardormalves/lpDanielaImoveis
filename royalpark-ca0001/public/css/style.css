@@ -134,13 +134,14 @@ body.is-ready .nav { transform: none; opacity: 1; }
 .hero__title .line > span { display: block; transform: translateY(110%); }
 .hero__title .line--em { padding-left: clamp(40px, 12vw, 200px); }
 .hero__meta { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: clamp(20px, 3vh, 32px); opacity: 0; }
+/* a ficha passou a ser o último bloco do hero: sem o botão abaixo, a margem viraria um vão */
+.hero__meta:last-child { margin-bottom: 0; }
 .hero__meta-item { padding: clamp(12px, 2vh, 18px) 32px clamp(12px, 2vh, 18px) 0; margin-right: 32px; border-right: 1px solid var(--line); }
 .hero__meta-item:last-child { border-right: 0; }
 .hero__meta-item span { font-family: var(--serif); font-size: clamp(26px, 4vh, 36px); line-height: 1; display: block; }
 .hero__meta-item small { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--fg-2); }
 .hero__meta-item--price { margin-left: auto; margin-right: 0; padding-right: 0; }
 .hero__meta-item--price span { color: var(--champ); }
-.hero .btn-line { opacity: 0; }
 
 /* ---------- Marquee ---------- */
 .marquee { overflow: hidden; padding: 16px 0; background: var(--brand); color: #fff; }
@@ -174,6 +175,7 @@ body.is-ready .nav { transform: none; opacity: 1; }
 .video__text h2 { margin-bottom: 24px; }
 .video__lead { color: var(--fg-2); font-size: 17px; max-width: 46ch; margin-bottom: 20px; }
 .video__dur { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--fg-2); margin-bottom: 32px; }
+.video__dur:last-child { margin-bottom: 0; }
 .video__dur span { font-family: var(--serif); font-size: 24px; letter-spacing: 0; text-transform: none; color: #fff; margin-right: 8px; }
 /* moldura vertical 9:16, o vídeo é um tour gravado no celular */
 .video__frame { position: relative; width: 100%; max-width: 330px; margin: 0 auto; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 20px; background: #000; box-shadow: 0 34px 70px -34px rgba(47,39,36,.9); }

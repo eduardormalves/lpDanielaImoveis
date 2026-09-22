@@ -92,10 +92,6 @@ const foto = (i) => asset(imovel.fotos[i].src);
         <div class="hero__meta-item"><span><%= imovel.vagas %></span><small>vagas</small></div>
         <div class="hero__meta-item hero__meta-item--price"><span><%= imovel.precoFormatado %></span><small>valor de venda</small></div>
       </div>
-      <a href="<%= whatsapp('Olá, Daniela! Vi a página da casa no ' + imovel.edificio + ' (' + imovel.codigo + ') e quero agendar uma visita.') %>" target="_blank" rel="noopener" class="btn-line" data-hover>
-        <span>Agendar visita exclusiva</span>
-        <%- arrow %>
-      </a>
     </div>
   </header>
 
@@ -136,10 +132,6 @@ const foto = (i) => asset(imovel.fotos[i].src);
       <h2 class="lines-reveal">Conheça a casa<br><em>por dentro</em>.</h2>
       <p class="video__lead" data-reveal><%= imovel.video.texto %></p>
       <p class="video__dur" data-reveal><span><%= imovel.video.duracao %></span> de tour guiado</p>
-      <a href="<%= whatsapp('Olá, Daniela! Assisti ao vídeo da casa no ' + imovel.edificio + ' (' + imovel.codigo + ') e quero conhecer pessoalmente.') %>" target="_blank" rel="noopener" class="btn-line" data-hover>
-        <span>Quero ver pessoalmente</span>
-        <%- arrow %>
-      </a>
     </div>
     <div class="video__player" data-reveal>
       <figure class="video__frame" id="videoFrame">
