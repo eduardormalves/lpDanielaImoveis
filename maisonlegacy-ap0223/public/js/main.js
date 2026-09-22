@@ -268,18 +268,23 @@
     });
   });
 
-  /* ---------- Sticky bar (aparece depois do hero, some no CTA final) ---------- */
+  /* ---------- Sticky bar ---------- */
+  // Fica à mostra desde o começo (o CSS a solta junto com body.is-ready) e só
+  // recolhe na seção da consultora, que já tem o próprio botão de WhatsApp.
+  // end: 'max' mantém o estado até o fim da página, para ela não reaparecer
+  // por cima do rodapé.
   const sticky = $('#stickybar');
-  ScrollTrigger.create({
-    trigger: '.hero', start: 'bottom 80%',
-    onEnter: () => sticky.classList.add('is-visible'),
-    onLeaveBack: () => sticky.classList.remove('is-visible'),
+  // end inalcançável de propósito: com 'max' o trigger desativa no último pixel
+  // da página e a barra reaparecia por cima do rodapé
+  const finalST = ScrollTrigger.create({
+    trigger: '.final', start: 'top 70%', end: '+=99999',
+    onToggle: (self) => sticky.classList.toggle('is-hidden', self.isActive === true),
   });
-  ScrollTrigger.create({
-    trigger: '.final', start: 'top 70%',
-    onEnter: () => sticky.classList.remove('is-visible'),
-    onLeaveBack: () => sticky.classList.add('is-visible'),
-  });
+  // estado inicial pela geometria: na criação do trigger isActive ainda é
+  // undefined, e toggle(classe, undefined) inverteria em vez de definir.
+  // Também cobre quem abre a página já rolada (âncora, refresh no meio).
+  const syncSticky = () => sticky.classList.toggle('is-hidden', window.scrollY >= finalST.start);
+  syncSticky();
 
   /* ---------- Contador animado nas specs ---------- */
   $$('.spec b').forEach((el) => {
@@ -292,5 +297,5 @@
     });
   });
 
-  window.addEventListener('load', () => ScrollTrigger.refresh());
+  window.addEventListener('load', () => { ScrollTrigger.refresh(); syncSticky(); });
 })();
