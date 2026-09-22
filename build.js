@@ -1,5 +1,5 @@
 /**
- * Build estático para GitHub Pages.
+ * Build estático para GitHub Pages / Cloudflare Workers.
  * Renderiza os EJS em HTML puro dentro de dist/ e copia os assets.
  *
  *   BASE_PATH=/lpDanielaImoveis node build.js   → paths com prefixo (GitHub Pages em subpasta)
@@ -13,8 +13,7 @@ const ROOT = __dirname;
 const DIST = path.join(ROOT, 'dist');
 const BASE = (process.env.BASE_PATH || '').replace(/\/$/, '');
 
-const imovel = require('./shared/data/imovel.json');
-const { landings, whatsapp, formatBRL } = require('./server');
+const { landings, corretora, dadosDe, assetPath, whatsapp, formatBRL } = require('./server');
 
 const rimraf = (p) => fs.rmSync(p, { recursive: true, force: true });
 const copy = (src, dst) => fs.cpSync(src, dst, { recursive: true });
@@ -37,16 +36,21 @@ const rebase = (html) => {
 rimraf(DIST);
 fs.mkdirSync(DIST, { recursive: true });
 
-// Assets compartilhados (fotos, logos)
+// Assets da marca (logos, foto da Daniela)
 copy(path.join(ROOT, 'shared', 'img'), path.join(DIST, 'shared', 'img'));
 
-// Cada landing: HTML + public/
+// Cada landing: HTML + public/ (que já traz as mídias do imóvel em media/)
 const renderLanding = (lp) => {
   const base = `/${lp.slug}`;
+  const imovel = dadosDe(lp);
   const tpl = fs.readFileSync(path.join(ROOT, lp.dir, 'views', 'index.ejs'), 'utf8');
-  return rebase(ejs.render(tpl, { imovel, base, lp, waLink: whatsapp(), whatsapp, formatBRL }, {
-    filename: path.join(ROOT, lp.dir, 'views', 'index.ejs'),
-  }));
+  return rebase(
+    ejs.render(
+      tpl,
+      { imovel, base, lp, asset: assetPath(base), waLink: whatsapp(null, imovel), whatsapp, formatBRL },
+      { filename: path.join(ROOT, lp.dir, 'views', 'index.ejs') }
+    )
+  );
 };
 landings.forEach((lp) => {
   write(path.join(DIST, lp.slug, 'index.html'), renderLanding(lp));
@@ -55,7 +59,8 @@ landings.forEach((lp) => {
 
 // Raiz: página neutra (logo + contato), sem listar imóveis
 const indexHtml = ejs.render(fs.readFileSync(path.join(ROOT, 'views', 'index.ejs'), 'utf8'), {
-  imovel, waLink: whatsapp('Olá, Daniela! Gostaria de mais informações.'),
+  corretora,
+  waLink: whatsapp('Olá, Daniela! Gostaria de mais informações.'),
 });
 write(path.join(DIST, 'index.html'), rebase(indexHtml));
 

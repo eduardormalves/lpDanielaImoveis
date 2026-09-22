@@ -1,5 +1,7 @@
 /* =========================================================
-   LANDING 02 · NOIR · interações (GSAP + ScrollTrigger)
+   LANDING CA0001 · ROYAL PARK · interações (GSAP + ScrollTrigger)
+   Versão compacta da AP0223: sem navegação por ambientes e sem
+   accordion; com o player do tour em vídeo no lugar.
    ========================================================= */
 (() => {
   const $ = (s, c = document) => c.querySelector(s);
@@ -122,6 +124,29 @@
     });
   });
 
+  /* ---------- Tour em vídeo ---------- */
+  // preload="none": o mp4 (≈6 MB) só baixa quando a pessoa toca em play.
+  const vid = $('#tourVideo');
+  const vidFrame = $('#videoFrame');
+  if (vid) {
+    // o markup traz controls (fallback sem JS); enquanto o poster está à mostra
+    // eles saem de cena para não competirem com o botão de play
+    vid.controls = false;
+    $('#videoPlay').addEventListener('click', () => vid.play());
+    vid.addEventListener('play', () => { vidFrame.classList.add('is-playing'); vid.controls = true; });
+    // no fim volta o poster + botão, para dar um segundo play sem procurar controle
+    vid.addEventListener('ended', () => {
+      vidFrame.classList.remove('is-playing');
+      vid.controls = false;
+      vid.load();
+    });
+    // sair da seção com o vídeo tocando pausa o áudio
+    ScrollTrigger.create({
+      trigger: '.video', start: 'top bottom', end: 'bottom top',
+      onLeave: () => vid.pause(), onLeaveBack: () => vid.pause(),
+    });
+  }
+
   /* ---------- Galeria: loop infinito arrastável ---------- */
   // O trilho tem as fotos duplicadas; `x` é o deslocamento e volta a zero ao passar
   // da metade, o que torna o loop invisível. Anda sozinho a BASE px/s; arrastar
@@ -225,48 +250,6 @@
     const dx = e.clientX - swX; swX = null;
     if (dx > 50) showLb(lbCur - 1);
     else if (dx < -50) showLb(lbCur + 1);
-  });
-
-  /* ---------- Tour por ambientes ---------- */
-  const tourItems = $$('.tour__item');
-  const tourImgs = $$('.tour__stage img');
-  const tourLabel = $('#tourLabel');
-  let tourIdx = 0;
-  let tourTimer;
-
-  const setTour = (i) => {
-    tourIdx = i;
-    tourItems.forEach((it, k) => it.classList.toggle('is-active', k === i));
-    tourImgs.forEach((im, k) => im.classList.toggle('is-active', k === i));
-    tourLabel.textContent = $('h3', tourItems[i]).textContent;
-    // reinicia a barra de progresso
-    const barEl = $('.tour__bar i', tourItems[i]);
-    barEl.style.animation = 'none';
-    void barEl.offsetWidth;
-    barEl.style.animation = '';
-  };
-  const startTour = () => {
-    clearInterval(tourTimer);
-    tourTimer = setInterval(() => setTour((tourIdx + 1) % tourItems.length), 5000);
-  };
-  tourItems.forEach((it) => {
-    const go = () => { setTour(Number(it.dataset.index)); startTour(); };
-    it.addEventListener('click', go);
-    it.addEventListener('mouseenter', () => { if (isDesktop()) go(); });
-  });
-  ScrollTrigger.create({
-    trigger: '.tour', start: 'top 60%', end: 'bottom 40%',
-    onEnter: startTour, onEnterBack: startTour,
-    onLeave: () => clearInterval(tourTimer), onLeaveBack: () => clearInterval(tourTimer),
-  });
-
-  /* ---------- Accordion ---------- */
-  $$('.acc__item').forEach((item) => {
-    $('.acc__head', item).addEventListener('click', () => {
-      const open = item.classList.contains('is-open');
-      $$('.acc__item').forEach((i) => i.classList.remove('is-open'));
-      if (!open) item.classList.add('is-open');
-    });
   });
 
   /* ---------- Sticky bar (aparece depois do hero, some no CTA final) ---------- */

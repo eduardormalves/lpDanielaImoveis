@@ -1,0 +1,164 @@
+{
+  "codigo": "CA0001",
+  "titulo": "Sobrado de alto padrão no Royal Park Residence",
+  "subtitulo": "Cinco suítes, elevador, piscina aquecida e energia solar no bairro Esperança",
+  "edificio": "Royal Park Residence",
+  "tipo": "Sobrado",
+  "endereco": "Avenida Gil de Abreu Souza, 2001",
+  "bairro": "Esperança",
+  "cidade": "Londrina",
+  "uf": "PR",
+  "preco": 6000000,
+  "precoFormatado": "R$ 6.000.000",
+  "area": 398,
+  "areaTerreno": 592,
+  "suites": 5,
+  "quartos": 5,
+  "banheiros": 6,
+  "vagas": 4,
+  "descricao": "Sobrado com 398 m² de área útil em terreno de 592 m², dentro do condomínio Royal Park Residence. Cinco suítes, elevador interno e móveis Bontempo em todos os ambientes. Piscina aquecida com deck de madeira e pergolado, espaço gourmet amplo com entrada independente, escritório privativo e adega. Energia fotovoltaica própria e garagem para quatro carros.",
+  "video": {
+    "src": "/media/tour.mp4",
+    "poster": "/media/tour-poster.webp",
+    "duracao": "1 min 22",
+    "titulo": "Tour guiado pela casa",
+    "texto": "Um passeio completo pelos ambientes, da entrada ao gourmet, passando pelas suítes, pelo escritório e pela piscina."
+  },
+  "destaques": [
+    {
+      "icone": "elevator",
+      "titulo": "Elevador interno",
+      "texto": "Elevador ligando os pavimentos do sobrado, com acesso direto às áreas social e íntima."
+    },
+    {
+      "icone": "pool",
+      "titulo": "Piscina aquecida",
+      "texto": "Piscina aquecida com deck de madeira e pergolado, integrada ao espaço gourmet."
+    },
+    {
+      "icone": "furniture",
+      "titulo": "Móveis Bontempo",
+      "texto": "Marcenaria e mobiliário Bontempo sob medida em toda a casa, prontos para morar."
+    },
+    {
+      "icone": "solar",
+      "titulo": "Energia fotovoltaica",
+      "texto": "Sistema de energia solar próprio instalado, reduzindo o custo mensal da casa."
+    },
+    {
+      "icone": "wine",
+      "titulo": "Gourmet e adega",
+      "texto": "Espaço gourmet amplo com entrada independente, bar completo e adega."
+    },
+    {
+      "icone": "desk",
+      "titulo": "Escritório privativo",
+      "texto": "Sala de escritório reservada, com estantes iluminadas e bancada de trabalho sob medida."
+    },
+    {
+      "icone": "bed",
+      "titulo": "5 suítes",
+      "texto": "Cinco suítes com armários planejados, ar-condicionado e banheiros completos."
+    },
+    {
+      "icone": "car",
+      "titulo": "4 vagas",
+      "texto": "Garagem para quatro carros dentro do terreno de 592 m²."
+    }
+  ],
+  "fotos": [
+    {
+      "src": "/media/01.webp",
+      "alt": "Living integrado com painel em mármore, marcenaria amadeirada e sofás de couro",
+      "titulo": "Living"
+    },
+    {
+      "src": "/media/02.webp",
+      "alt": "Espaço gourmet com forro de madeira, bar e vista para a piscina",
+      "titulo": "Espaço gourmet"
+    },
+    {
+      "src": "/media/03.webp",
+      "alt": "Piscina com deck de madeira e pergolado",
+      "titulo": "Piscina"
+    },
+    {
+      "src": "/media/04.webp",
+      "alt": "Cozinha gourmet com ilha, mesa de jantar e forro de madeira",
+      "titulo": "Cozinha gourmet"
+    },
+    {
+      "src": "/media/05.webp",
+      "alt": "Suíte master com painel ripado de madeira e iluminação em sanca",
+      "titulo": "Suíte master"
+    },
+    {
+      "src": "/media/06.webp",
+      "alt": "Copa com ilha em pedra, banquetas e pendentes",
+      "titulo": "Copa"
+    },
+    {
+      "src": "/media/07.webp",
+      "alt": "Mesa de jantar do espaço gourmet com bar ao fundo",
+      "titulo": "Jantar gourmet"
+    },
+    {
+      "src": "/media/08.webp",
+      "alt": "Living com poltronas de vime e painel em mármore",
+      "titulo": "Living"
+    },
+    {
+      "src": "/media/09.webp",
+      "alt": "Escritório com estante iluminada e mesa de trabalho",
+      "titulo": "Escritório"
+    },
+    {
+      "src": "/media/10.webp",
+      "alt": "Suíte com painel ripado e armários espelhados",
+      "titulo": "Suíte"
+    },
+    {
+      "src": "/media/11.webp",
+      "alt": "Lateral da casa com piscina e jardim",
+      "titulo": "Área externa"
+    },
+    {
+      "src": "/media/12.webp",
+      "alt": "Mezanino com guarda-corpo de vidro sobre a área social",
+      "titulo": "Mezanino"
+    },
+    {
+      "src": "/media/13.webp",
+      "alt": "Banheiro master com banheira e bancada dupla",
+      "titulo": "Banheiro master"
+    },
+    {
+      "src": "/media/14.webp",
+      "alt": "Adega com garrafeira e bar",
+      "titulo": "Adega",
+      "orient": "tall"
+    },
+    {
+      "src": "/media/15.webp",
+      "alt": "Sala de jantar com pendentes e painel em pedra",
+      "titulo": "Sala de jantar",
+      "orient": "tall"
+    },
+    {
+      "src": "/media/16.webp",
+      "alt": "Suíte master com bancada, TV e armários espelhados",
+      "titulo": "Suíte master"
+    },
+    {
+      "src": "/media/17.webp",
+      "alt": "Hall de entrada com porta do elevador interno",
+      "titulo": "Elevador",
+      "orient": "tall"
+    },
+    {
+      "src": "/media/18.webp",
+      "alt": "Banheiro de suíte com box de vidro e bancada dupla",
+      "titulo": "Banheiro suíte"
+    }
+  ]
+}

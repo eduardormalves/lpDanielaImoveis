@@ -1,6 +1,6 @@
-# Landing Pages — Daniela Ribeiro Imóveis
+# Landing Pages da Daniela Ribeiro Imóveis
 
-Landing page para o apartamento **AP0223 — Maison Legacy Residence** (Gleba Fazenda Palhano, Londrina/PR), construída com **Node.js + Express + EJS**.
+Landing pages de imóveis da **Daniela Ribeiro Imóveis**, construídas com **Node.js + Express + EJS**. Todas compartilham a mesma identidade visual (marrom `#84716B` + branco, fundo claro) e os mesmos assets de marca.
 
 ## Como rodar
 
@@ -9,36 +9,69 @@ npm install
 npm start
 ```
 
-Abra <http://localhost:3000>. A raiz `/` é uma página neutra (logo + WhatsApp), sem listar imóveis — cada landing é divulgada só pelo link direto:
+Abra <http://localhost:3000>. A raiz `/` é uma página neutra (logo + WhatsApp), sem listar imóveis. Cada landing é divulgada só pelo link direto:
 
-| Rota                    | Pasta                  | Estilo                       | Interações principais |
-|-------------------------|------------------------|------------------------------|-----------------------|
-| `/maisonlegacy/ap0223/` | `maisonlegacy-ap0223/` | Identidade da marca (marrom #84716B + branco, fundo claro) | Preloader, cursor customizado, título com máscara, galeria em loop infinito, navegação por ambientes com crossfade e auto-avanço, marquee, accordion, barra de CTA fixa |
+| Rota                    | Pasta                  | Imóvel | Interações principais |
+|-------------------------|------------------------|--------|-----------------------|
+| `/maisonlegacy/ap0223/` | `maisonlegacy-ap0223/` | Apartamento 183 m², Gleba Palhano | Preloader, cursor customizado, galeria em loop infinito, navegação por ambientes com crossfade, marquee, accordion, barra de CTA fixa |
+| `/royalpark/ca0001/`    | `royalpark-ca0001/`    | Casa 398 m², Esperança | **Versão compacta:** preloader, cursor, hero, **tour em vídeo**, galeria em loop, ficha com destaques em grade, barra de CTA fixa |
 
 A página tem botão flutuante e CTAs que levam ao WhatsApp **+55 43 99995-9080** (`https://wa.me/5543999959080`) com mensagem pré-preenchida.
+
+### Sobre a versão compacta (CA0001)
+
+Feita a partir do modelo da AP0223, com o mesmo layout e paleta, mas mais curta e direta:
+
+- **saiu** a seção de navegação por ambientes (tela cheia com crossfade e auto-avanço);
+- **saiu** o accordion de destaques, que virou uma grade com os 8 destaques visíveis de uma vez;
+- **entrou** o bloco de **tour em vídeo**, em moldura vertical 9:16 sobre o marrom da marca;
+- espaçamentos verticais menores (variável `--sec` no CSS).
+
+Resultado: ~17% mais curta que a AP0223 no desktop (5.8k vs 7.1k px) e ~6% no celular.
 
 ## Estrutura
 
 ```
 ├── server.js                # Express: rota / + uma rota por landing
+├── build.js                 # Render estático para dist/
 ├── views/index.ejs          # Página neutra da raiz (logo + contato)
 ├── shared/
-│   ├── data/imovel.json     # Dados do imóvel, fotos, corretora (fonte única)
-│   └── img/                 # 20 fotos (.webp) + logos + fotos da Daniela (recorte sem fundo)
-└── maisonlegacy-ap0223/     # <edifício>-<código da ficha>
+│   ├── data/
+│   │   ├── corretora.json   # Dados da Daniela, comuns a TODAS as landings
+│   │   ├── ap0223.json      # Dados do imóvel AP0223
+│   │   └── ca0001.json      # Dados do imóvel CA0001
+│   └── img/                 # Assets de marca: logos, fotos da Daniela
+│                            # (+ as 20 fotos da AP0223, que nasceram aqui)
+├── maisonlegacy-ap0223/     # <empreendimento>-<código da ficha>
+│   ├── views/index.ejs
+│   └── public/{css,js}/
+└── royalpark-ca0001/
     ├── views/index.ejs
-    └── public/{css,js}/
+    └── public/
+        ├── css/ js/
+        └── media/           # 18 fotos .webp + tour.mp4 + poster do vídeo
 ```
 
-## Personalizando
+Cada landing recebe na view o objeto `imovel` (dados do próprio imóvel + o bloco `corretora`), `base` (o caminho público) e o helper `asset(src)`, que resolve `/media/…` para dentro da landing e deixa `/shared/…` intacto.
 
-- **Dados do imóvel / fotos / telefone:** edite `shared/data/imovel.json`. A página lê desse arquivo.
-- **Mensagem padrão do WhatsApp:** função `whatsapp()` em `server.js`.
-- **Adicionar uma nova landing:** crie a pasta `<edificio>-<codigo>/` com `views/index.ejs` + `public/`, e adicione a entrada no array `landings` em `server.js`. O `slug` vira o caminho público (`<edificio>/<codigo>`); use o código da ficha, não o número do apartamento.
+## Adicionando uma nova landing
+
+1. Crie `shared/data/<codigo>.json` com os dados do imóvel (use `ca0001.json` como base).
+2. Crie a pasta `<empreendimento>-<codigo>/` com `views/index.ejs` e `public/{css,js,media}/`.
+3. Coloque fotos e vídeos em `public/media/` e referencie-os no JSON como `/media/arquivo.webp`. A view resolve com `asset()`.
+4. Adicione a entrada no array `landings` em [server.js](server.js), apontando `dados` para o JSON criado.
+
+O `slug` vira o caminho público (`<empreendimento>/<código>`); use o código da ficha, não o número do apartamento.
+
+> As fotos da AP0223 continuam em `shared/img/` por serem anteriores a essa organização. Landings novas colocam as mídias em `public/media/`.
+
+## Preparando as mídias
+
+Fotos: converter para `.webp` (qualidade ~80) e manter a largura máxima em torno de 1024 px. Vídeos: reencodar para H.264 com áudio AAC e `-movflags +faststart` (o tour do CA0001 ficou em 480×854, ~6 MB para 1 min 22). Vale conferir o final do arquivo, que às vezes traz telefone ou marca de terceiros.
 
 ## Dependências externas (CDN)
 
-- Google Fonts (Inter, Cormorant Garamond/Manrope)
+- Google Fonts (Cormorant Garamond + Manrope)
 - GSAP 3.12.5 + ScrollTrigger
 - Google Maps Embed (sem chave de API)
 
@@ -47,7 +80,7 @@ A página tem botão flutuante e CTAs que levam ao WhatsApp **+55 43 99995-9080*
 O GitHub Pages hospeda apenas arquivos estáticos, então o deploy usa `build.js`, que renderiza os EJS em HTML puro dentro de `dist/`:
 
 ```bash
-npm run build                          # paths na raiz (domínio próprio)
+npm run build                               # paths na raiz (domínio próprio)
 BASE_PATH=/lpDanielaImoveis npm run build   # paths com prefixo (GitHub Pages em subpasta)
 ```
 
@@ -64,6 +97,9 @@ O [wrangler.jsonc](wrangler.jsonc) publica a pasta `dist/` como site estático. 
 - Comando da build: `npm run build`
 - Comando de implantação: `npx wrangler deploy`
 
-Não defina `BASE_PATH` — na Cloudflare o site fica na raiz do domínio.
+Não defina `BASE_PATH`: na Cloudflare o site fica na raiz do domínio.
 
-URL publicada: <https://lp.danielaribeiroimoveis.com.br/maisonlegacy/ap0223/>
+URLs publicadas:
+
+- <https://lp.danielaribeiroimoveis.com.br/maisonlegacy/ap0223/>
+- <https://lp.danielaribeiroimoveis.com.br/royalpark/ca0001/>

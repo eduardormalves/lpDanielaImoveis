@@ -1,16 +1,19 @@
 <%
 const waIcon = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 18.3c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.3 8.3 0 1 1 12 20.3"/></svg>';
-const social = imovel.fotos.filter(f => f.cat === 'social');
-const tour = [
-  { nome: 'Living', desc: 'Sofá amplo, iluminação em sanca e vista para o skyline.', foto: imovel.fotos[0] },
-  { nome: 'Varanda gourmet', desc: 'Integrada ao living, com poltronas de couro e bancada em pedra.', foto: imovel.fotos[1] },
-  { nome: 'Espaço gourmet', desc: 'Churrasqueira, adega climatizada e revestimento amadeirado.', foto: imovel.fotos[5] },
-  { nome: 'Sala de jantar', desc: 'Mesa redonda em madeira e cristaleira iluminada.', foto: imovel.fotos[6] },
-  { nome: 'Cozinha', desc: 'Planejada, com eletros embutidos e porcelanato marmorizado.', foto: imovel.fotos[8] },
-  { nome: 'Suíte master', desc: 'Painel ripado, armários espelhados e vista aberta.', foto: imovel.fotos[11] },
-  { nome: 'Suítes', desc: 'Marcenaria completa, ar-condicionado e muita luz natural.', foto: imovel.fotos[13] },
-  { nome: 'Banheiros', desc: 'Bancadas em mármore e revestimentos texturizados.', foto: imovel.fotos[17] },
-];
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+// ícones dos destaques (traço fino, mesma caixa 24×24)
+const icones = {
+  elevator: '<path d="M5 3h14v18H5zM12 3v18M8.5 9 10 7l1.5 2M8.5 15 10 17l1.5-2"/>',
+  pool:     '<path d="M2 17c2 0 2 1.6 4 1.6S8 17 10 17s2 1.6 4 1.6S16 17 18 17s2 1.6 4 1.6M7 16V5a2 2 0 0 1 4 0v11M13 16V5a2 2 0 0 1 4 0v11M7 8h10M7 12h10"/>',
+  furniture:'<path d="M4 11V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M3 11h18v6H3zM6 17v3M18 17v3"/>',
+  solar:    '<path d="M3 15h18l-2-9H5zM12 6v9M4.6 10.5h14.8M9 19h6M12 15v4"/>',
+  wine:     '<path d="M8 3h8l-1 7a3 3 0 0 1-6 0zM12 13v7M9 20h6"/>',
+  desk:     '<path d="M3 9h18M4 9V5h16v4M5 9v11M19 9v11M9 13h6"/>',
+  bed:      '<path d="M3 18v-7h18v7M3 18v2M21 18v2M3 11V6M7 11V8h10v3"/>',
+  car:      '<path d="M5 17h14M4 17v2M20 17v2M3 13l2-6h14l2 6v4H3zM7 15h.01M17 15h.01"/>',
+};
+const icone = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${icones[k] || icones.bed}</svg>`;
+const foto = (i) => asset(imovel.fotos[i].src);
 %><!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -19,7 +22,8 @@ const tour = [
   <title><%= imovel.edificio %> · <%= imovel.area %> m² · <%= imovel.corretora.nome %></title>
   <meta name="description" content="<%= imovel.descricao %>">
   <meta property="og:title" content="<%= imovel.titulo %>">
-  <meta property="og:image" content="<%= imovel.fotos[5].src %>">
+  <meta property="og:description" content="<%= imovel.subtitulo %>">
+  <meta property="og:image" content="<%= foto(1) %>">
   <link rel="icon" href="<%= imovel.corretora.logoMark %>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,11 +49,10 @@ const tour = [
     <a href="#top" class="nav__logo"><img src="<%= imovel.corretora.logoWhite %>" alt="<%= imovel.corretora.nome %>"></a>
     <div class="nav__links">
       <a href="#intro" data-hover>Imóvel</a>
+      <a href="#video" data-hover>Vídeo</a>
       <a href="#galeria" data-hover>Galeria</a>
-      <a href="#tour" data-hover>Ambientes</a>
-      <a href="#specs" data-hover>Ficha</a>
-      <a href="#local" data-hover>Localização</a>
-      <a href="#consultora" data-hover>Consultora</a>
+      <a href="#ficha" data-hover>Ficha</a>
+      <a href="#consultora" data-hover>Contato</a>
     </div>
     <a href="<%= waLink %>" target="_blank" rel="noopener" class="nav__cta" data-hover><%- waIcon %> <span>Falar no WhatsApp</span></a>
     <button class="nav__burger" id="burger" aria-label="Abrir menu" aria-expanded="false" data-hover><span></span><span></span></button>
@@ -59,11 +62,10 @@ const tour = [
   <div class="menu" id="menu" aria-hidden="true">
     <nav class="menu__links">
       <a href="#intro"><small>01</small>Imóvel</a>
-      <a href="#galeria"><small>02</small>Galeria</a>
-      <a href="#tour"><small>03</small>Ambientes</a>
-      <a href="#specs"><small>04</small>Ficha</a>
-      <a href="#local"><small>05</small>Localização</a>
-      <a href="#consultora"><small>06</small>Consultora</a>
+      <a href="#video"><small>02</small>Vídeo</a>
+      <a href="#galeria"><small>03</small>Galeria</a>
+      <a href="#ficha"><small>04</small>Ficha</a>
+      <a href="#consultora"><small>05</small>Contato</a>
     </nav>
     <div class="menu__foot">
       <div class="menu__who">
@@ -76,40 +78,39 @@ const tour = [
 
   <!-- ===== HERO ===== -->
   <header class="hero" id="top">
-    <div class="hero__bg"><img src="<%= imovel.fotos[4].src %>" alt="" id="heroImg"></div>
+    <div class="hero__bg"><img src="<%= foto(1) %>" alt="" id="heroImg"></div>
     <div class="hero__grain"></div>
     <div class="hero__content">
       <p class="hero__eyebrow split">Ref. <%= imovel.codigo %> · <%= imovel.bairro %>, <%= imovel.cidade %></p>
       <h1 class="hero__title">
-        <span class="line"><span>Maison</span></span>
-        <span class="line"><span>Legacy</span></span>
-        <span class="line line--em"><span><em>Residence</em></span></span>
+        <span class="line"><span>Royal</span></span>
+        <span class="line line--em"><span><em>Park</em></span></span>
       </h1>
       <div class="hero__meta">
-        <div class="hero__meta-item"><span><%= imovel.area %></span><small>m² privativos</small></div>
+        <div class="hero__meta-item"><span><%= imovel.area %></span><small>m² úteis</small></div>
         <div class="hero__meta-item"><span><%= imovel.suites %></span><small>suítes</small></div>
         <div class="hero__meta-item"><span><%= imovel.vagas %></span><small>vagas</small></div>
         <div class="hero__meta-item hero__meta-item--price"><span><%= imovel.precoFormatado %></span><small>valor de venda</small></div>
       </div>
-      <a href="<%= whatsapp('Olá, Daniela! Vi a página do ' + imovel.edificio + ' (' + imovel.codigo + ') e quero agendar uma visita.') %>" target="_blank" rel="noopener" class="btn-line" data-hover>
+      <a href="<%= whatsapp('Olá, Daniela! Vi a página da casa no ' + imovel.edificio + ' (' + imovel.codigo + ') e quero agendar uma visita.') %>" target="_blank" rel="noopener" class="btn-line" data-hover>
         <span>Agendar visita exclusiva</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <%- arrow %>
       </a>
     </div>
-    <div class="hero__scroll"><span>Role para explorar</span><i></i></div>
   </header>
 
   <!-- ===== MARQUEE ===== -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
       <% for (let r = 0; r < 2; r++) { %>
-        <span><%= imovel.area %> m²</span><i>◆</i>
+        <span><%= imovel.area %> m² úteis</span><i>◆</i>
         <span><%= imovel.suites %> suítes</span><i>◆</i>
-        <span>Andar alto</span><i>◆</i>
-        <span>Mobiliado</span><i>◆</i>
-        <span>Cozinha planejada</span><i>◆</i>
+        <span>Elevador</span><i>◆</i>
+        <span>Piscina aquecida</span><i>◆</i>
+        <span>Energia solar</span><i>◆</i>
+        <span>Adega</span><i>◆</i>
         <span><%= imovel.vagas %> vagas</span><i>◆</i>
-        <span>Gleba Palhano</span><i>◆</i>
+        <span>Royal Park</span><i>◆</i>
       <% } %>
     </div>
   </div>
@@ -119,31 +120,57 @@ const tour = [
     <div class="intro__grid">
       <div class="intro__num" data-reveal>
         <span class="intro__big"><%= imovel.area %></span>
-        <span class="intro__unit">m² de área privativa<br>em andar alto</span>
+        <span class="intro__unit">m² úteis em terreno<br>de <%= imovel.areaTerreno %> m²</span>
       </div>
       <div class="intro__text">
-        <h2 class="lines-reveal">Um apartamento completo, entregue mobiliado, onde a área social se abre para a cidade.</h2>
+        <h2 class="lines-reveal"><%= imovel.tipo %> completo, mobiliado<br>e pronto para morar.</h2>
         <p data-reveal><%= imovel.descricao %></p>
         <div class="intro__tags" data-reveal>
-          <span>Gourmet integrado</span><span>Cozinha separada</span><span>Eletros embutidos</span><span>Marcenaria sob medida</span>
+          <span>Elevador</span><span>Móveis Bontempo</span><span>Piscina aquecida</span><span>Energia fotovoltaica</span><span>Adega</span><span>Escritório</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== VÍDEO ===== -->
+  <section class="video" id="video">
+    <div class="video__text">
+      <p class="eyebrow" data-reveal>Tour em vídeo</p>
+      <h2 class="lines-reveal">Conheça a casa<br><em>por dentro</em>.</h2>
+      <p class="video__lead" data-reveal><%= imovel.video.texto %></p>
+      <p class="video__dur" data-reveal><span><%= imovel.video.duracao %></span> de tour guiado</p>
+      <a href="<%= whatsapp('Olá, Daniela! Assisti ao vídeo da casa no ' + imovel.edificio + ' (' + imovel.codigo + ') e quero conhecer pessoalmente.') %>" target="_blank" rel="noopener" class="btn-line" data-hover>
+        <span>Quero ver pessoalmente</span>
+        <%- arrow %>
+      </a>
+    </div>
+    <div class="video__player" data-reveal>
+      <figure class="video__frame" id="videoFrame">
+        <video id="tourVideo" poster="<%= asset(imovel.video.poster) %>" preload="none" playsinline controls
+               aria-label="<%= imovel.video.titulo %>">
+          <source src="<%= asset(imovel.video.src) %>" type="video/mp4">
+          Seu navegador não reproduz vídeo. <a href="<%= asset(imovel.video.src) %>">Baixe o tour em vídeo</a>.
+        </video>
+        <button class="video__play" id="videoPlay" aria-label="Reproduzir o tour em vídeo" data-hover>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+        </button>
+      </figure>
     </div>
   </section>
 
   <!-- ===== GALERIA EM LOOP ===== -->
   <section class="hgal" id="galeria">
     <div class="hgal__head">
-      <p class="eyebrow" data-reveal>Área social</p>
-      <h2 data-reveal>Deslize pelos <em>ambientes</em></h2>
+      <p class="eyebrow" data-reveal>Ambientes</p>
+      <h2 data-reveal>Deslize pela <em>casa</em></h2>
     </div>
     <div class="hgal__viewport">
       <!-- as fotos são duplicadas para o loop ser contínuo; a 2ª cópia é escondida de leitores de tela -->
       <div class="hgal__track" id="hgalTrack">
-        <% [...social, ...social].forEach((f, i) => { %>
-          <figure class="hgal__item" data-hover="view" data-index="<%= i % social.length %>"<%- i >= social.length ? ' aria-hidden="true"' : '' %>>
-            <img src="<%= f.src %>" alt="<%= i >= social.length ? '' : f.alt %>" loading="lazy" draggable="false">
-            <figcaption><span>0<%= (i % social.length) + 1 %></span><%= f.titulo %></figcaption>
+        <% [...imovel.fotos, ...imovel.fotos].forEach((f, i) => { const n = i % imovel.fotos.length; %>
+          <figure class="hgal__item <%= f.orient === 'tall' ? 'hgal__item--tall' : '' %>" data-hover="view" data-index="<%= n %>"<%- i >= imovel.fotos.length ? ' aria-hidden="true"' : '' %>>
+            <img src="<%= asset(f.src) %>" alt="<%= i >= imovel.fotos.length ? '' : f.alt %>" loading="lazy" draggable="false">
+            <figcaption><span><%= String(n + 1).padStart(2, '0') %></span><%= f.titulo %></figcaption>
           </figure>
         <% }) %>
       </div>
@@ -151,55 +178,28 @@ const tour = [
     </div>
   </section>
 
-  <!-- ===== TOUR ===== -->
-  <section class="tour" id="tour">
-    <div class="tour__list">
-      <p class="eyebrow" data-reveal>Ambientes</p>
-      <ul id="tourList">
-        <% tour.forEach((t, i) => { %>
-          <li class="tour__item <%= i === 0 ? 'is-active' : '' %>" data-index="<%= i %>" data-hover>
-            <span class="tour__idx">0<%= i + 1 %></span>
-            <div>
-              <h3><%= t.nome %></h3>
-              <p><%= t.desc %></p>
-            </div>
-            <span class="tour__bar"><i></i></span>
-          </li>
-        <% }) %>
-      </ul>
-    </div>
-    <div class="tour__stage">
-      <% tour.forEach((t, i) => { %>
-        <img src="<%= t.foto.src %>" alt="<%= t.foto.alt %>" class="<%= i === 0 ? 'is-active' : '' %>" loading="lazy">
-      <% }) %>
-      <div class="tour__label" id="tourLabel"><%= tour[0].nome %></div>
-    </div>
-  </section>
-
-  <!-- ===== SPECS ===== -->
-  <section class="specs" id="specs">
+  <!-- ===== FICHA TÉCNICA + DESTAQUES ===== -->
+  <section class="ficha" id="ficha">
     <p class="eyebrow" data-reveal>Ficha técnica</p>
     <h2 data-reveal>Os números que <em>importam</em></h2>
     <div class="specs__grid">
-      <div class="spec" data-reveal><b><%= imovel.area %></b><small>m² privativos</small></div>
+      <div class="spec" data-reveal><b><%= imovel.area %></b><small>m² úteis</small></div>
+      <div class="spec" data-reveal><b><%= imovel.areaTerreno %></b><small>m² de terreno</small></div>
       <div class="spec" data-reveal><b><%= imovel.suites %></b><small>suítes</small></div>
       <div class="spec" data-reveal><b><%= imovel.banheiros %></b><small>banheiros</small></div>
       <div class="spec" data-reveal><b><%= imovel.vagas %></b><small>vagas</small></div>
-      <div class="spec" data-reveal><b>Alto</b><small>andar</small></div>
-      <div class="spec" data-reveal><b>Sim</b><small>mobiliado</small></div>
+      <div class="spec" data-reveal><b>Sim</b><small>elevador</small></div>
     </div>
 
-    <div class="acc" id="acc">
-      <% imovel.destaques.forEach((d, i) => { %>
-        <div class="acc__item <%= i === 0 ? 'is-open' : '' %>" data-reveal>
-          <button class="acc__head" data-hover>
-            <span><%= d.titulo %></span>
-            <i></i>
-          </button>
-          <div class="acc__body"><p><%= d.texto %></p></div>
-        </div>
+    <ul class="destaques">
+      <% imovel.destaques.forEach((d) => { %>
+        <li class="destaque" data-reveal>
+          <i class="destaque__ico" aria-hidden="true"><%- icone(d.icone) %></i>
+          <h3><%= d.titulo %></h3>
+          <p><%= d.texto %></p>
+        </li>
       <% }) %>
-    </div>
+    </ul>
   </section>
 
   <!-- ===== LOCAL ===== -->
@@ -207,10 +207,10 @@ const tour = [
     <div class="local__text">
       <p class="eyebrow" data-reveal>Localização</p>
       <h2 data-reveal><%= imovel.endereco %><br><em><%= imovel.bairro %></em></h2>
-      <p data-reveal>A região mais valorizada de <%= imovel.cidade %>: a minutos do Catuaí Shopping, do Lago Igapó e dos melhores restaurantes da Av. Ayrton Senna.</p>
+      <p data-reveal>Condomínio <%= imovel.edificio %>, na região do <%= imovel.bairro %>, com saída para a Av. Gil de Abreu e Souza e o Royal Golf, comércio e restaurantes a poucos minutos.</p>
       <a href="https://www.google.com/maps/search/?api=1&query=<%= encodeURIComponent(imovel.endereco + ', ' + imovel.bairro + ', ' + imovel.cidade + ' - ' + imovel.uf) %>" target="_blank" rel="noopener" class="btn-line" data-hover>
         <span>Abrir no Google Maps</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <%- arrow %>
       </a>
     </div>
     <div class="local__map" data-reveal>
@@ -232,7 +232,7 @@ const tour = [
       </div>
       <p class="final__bio" data-reveal><%= imovel.corretora.bio %></p>
       <div class="final__actions" data-reveal>
-        <a href="<%= whatsapp('Olá, Daniela! Quero agendar uma visita ao ' + imovel.edificio + ' (' + imovel.codigo + ').') %>" target="_blank" rel="noopener" class="btn-solid btn-solid--lg" data-hover><%- waIcon %> Chamar no WhatsApp</a>
+        <a href="<%= whatsapp('Olá, Daniela! Quero agendar uma visita à casa no ' + imovel.edificio + ' (' + imovel.codigo + ').') %>" target="_blank" rel="noopener" class="btn-solid btn-solid--lg" data-hover><%- waIcon %> Chamar no WhatsApp</a>
         <span><%= imovel.corretora.telefone %><small><%= imovel.corretora.creci %></small></span>
       </div>
     </div>
