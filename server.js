@@ -34,6 +34,15 @@ const landings = [
     descricao: 'Versão compacta: hero, tour em vídeo, galeria em loop, ficha técnica e CTA, sem a seção de ambientes e sem accordion.',
     capa: '/royalpark/ca0001/media/fachada.webp',
   },
+  {
+    slug: 'gloria/ap0229',
+    dir: 'gloria-ap0229',
+    dados: 'ap0229.json',
+    nome: 'Gloria Residence · AP0229',
+    tema: 'Identidade Daniela Ribeiro · marrom #84716B',
+    descricao: 'Versão enxuta para o WhatsApp: hero com CTA, galeria em loop, ficha com destaques e consultora. Sem preloader, menu, vídeo ou mapa.',
+    capa: '/gloria/ap0229/media/capa.webp',
+  },
 ];
 
 // Dados do imóvel + bloco da corretora, que é o mesmo em todas as landings

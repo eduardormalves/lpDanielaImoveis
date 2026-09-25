@@ -1,0 +1,134 @@
+{
+  "codigo": "AP0229",
+  "titulo": "Apartamento nunca habitado no Gloria Residence",
+  "subtitulo": "114 m², três quartos, planejados completos e varanda gourmet na Gleba Palhano",
+  "edificio": "Gloria Residence",
+  "tipo": "Apartamento",
+  "capa": "/media/capa.webp",
+  "endereco": "Rua Ernâni Lacerda de Athayde, 445",
+  "bairro": "Gleba Palhano",
+  "cidade": "Londrina",
+  "uf": "PR",
+  "preco": 1490000,
+  "precoFormatado": "R$ 1.490.000",
+  "area": 114,
+  "quartos": 3,
+  "suites": 1,
+  "banheiros": 3,
+  "vagas": 2,
+  "descricao": "Apartamento de 114 m² privativos no Edifício Gloria Residence, na Gleba Palhano. Nunca habitado e entregue completo: planejados em todos os ambientes, eletrodomésticos embutidos e três aparelhos de ar-condicionado já instalados. São três quartos, sendo uma suíte, varanda gourmet com churrasqueira, andar alto e duas vagas de garagem.",
+  "destaques": [
+    {
+      "icone": "key",
+      "titulo": "Nunca habitado",
+      "texto": "Primeira moradia do imóvel: tudo novo, sem uso e sem reforma pela frente."
+    },
+    {
+      "icone": "furniture",
+      "titulo": "Planejados completos",
+      "texto": "Marcenaria sob medida em todos os ambientes, do living aos quartos."
+    },
+    {
+      "icone": "oven",
+      "titulo": "Eletros embutidos",
+      "texto": "Cozinha entregue com os eletrodomésticos embutidos, pronta para usar."
+    },
+    {
+      "icone": "air",
+      "titulo": "Três ar-condicionados",
+      "texto": "Três aparelhos já instalados, sem obra nem custo extra na mudança."
+    },
+    {
+      "icone": "grill",
+      "titulo": "Varanda gourmet",
+      "texto": "Churrasqueira, bancada com pia e armários, integrada ao living."
+    },
+    {
+      "icone": "view",
+      "titulo": "Andar alto",
+      "texto": "Vista aberta para a Gleba Palhano a partir do living e dos quartos."
+    }
+  ],
+  "fotos": [
+    {
+      "src": "/media/01.webp",
+      "alt": "Living com varanda gourmet envidraçada, churrasqueira e vista para os prédios da Gleba Palhano",
+      "titulo": "Living e varanda"
+    },
+    {
+      "src": "/media/02.webp",
+      "alt": "Varanda gourmet com churrasqueira, bancada com pia e vista da cidade",
+      "titulo": "Varanda gourmet"
+    },
+    {
+      "src": "/media/03.webp",
+      "alt": "Living com painel amadeirado, rack planejado e cozinha integrada ao fundo",
+      "titulo": "Living"
+    },
+    {
+      "src": "/media/04.webp",
+      "alt": "Living com parede ripada e estante metálica com vidro",
+      "titulo": "Living"
+    },
+    {
+      "src": "/media/05.webp",
+      "alt": "Estante metálica com prateleiras de vidro e iluminação embutida",
+      "titulo": "Estante"
+    },
+    {
+      "src": "/media/06.webp",
+      "alt": "Vista geral do living com rack, estante e cozinha integrada",
+      "titulo": "Living"
+    },
+    {
+      "src": "/media/07.webp",
+      "alt": "Canto do living com parede ripada e janela para a varanda",
+      "titulo": "Living"
+    },
+    {
+      "src": "/media/08.webp",
+      "alt": "Bancada com iluminação em LED, geladeira embutida e vista pela janela",
+      "titulo": "Cozinha"
+    },
+    {
+      "src": "/media/09.webp",
+      "alt": "Cozinha com bancada de refeições, forno embutido e marcenaria amadeirada",
+      "titulo": "Cozinha"
+    },
+    {
+      "src": "/media/10.webp",
+      "alt": "Cozinha com cooktop, coifa, forno embutido e geladeira inox",
+      "titulo": "Cozinha"
+    },
+    {
+      "src": "/media/11.webp",
+      "alt": "Quarto com armário espelhado, painel amadeirado e ar-condicionado",
+      "titulo": "Quarto"
+    },
+    {
+      "src": "/media/12.webp",
+      "alt": "Banheiro com bancada dupla em pedra, box de vidro e armário espelhado",
+      "titulo": "Banheiro"
+    },
+    {
+      "src": "/media/13.webp",
+      "alt": "Quarto com armário espelhado, bancada de estudos e piso amadeirado",
+      "titulo": "Quarto"
+    },
+    {
+      "src": "/media/14.webp",
+      "alt": "Quarto com iluminação em sanca e armário espelhado",
+      "titulo": "Quarto"
+    },
+    {
+      "src": "/media/15.webp",
+      "alt": "Quarto com painel amadeirado e janela com vista para a cidade",
+      "titulo": "Quarto"
+    },
+    {
+      "src": "/media/16.webp",
+      "alt": "Banheiro com bancada em pedra, box de vidro e janela",
+      "titulo": "Banheiro"
+    }
+  ]
+}

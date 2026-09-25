@@ -15,6 +15,7 @@ Abra <http://localhost:3000>. A raiz `/` é uma página neutra (logo + WhatsApp)
 |-------------------------|------------------------|--------|-----------------------|
 | `/maisonlegacy/ap0223/` | `maisonlegacy-ap0223/` | Apartamento 183 m², Gleba Palhano | Preloader, cursor customizado, galeria em loop infinito, navegação por ambientes com crossfade, marquee, accordion, barra de CTA fixa |
 | `/royalpark/ca0001/`    | `royalpark-ca0001/`    | Casa 398 m², Esperança | **Versão compacta:** preloader, cursor, hero, **tour em vídeo**, galeria em loop, ficha com destaques em grade, barra de CTA fixa |
+| `/gloria/ap0229/`       | `gloria-ap0229/`       | Apartamento 114 m², Gleba Palhano | **Versão enxuta para o WhatsApp:** hero com CTA, galeria em loop, ficha com destaques e endereço, consultora, barra de CTA fixa |
 
 A página tem botão flutuante e CTAs que levam ao WhatsApp **+55 43 99995-9080** (`https://wa.me/5543999959080`) com mensagem pré-preenchida.
 
@@ -29,6 +30,17 @@ Feita a partir do modelo da AP0223, com o mesmo layout e paleta, mas mais curta 
 - espaçamentos verticais menores (variável `--sec` no CSS).
 
 Resultado: ~15% mais curta que a AP0223 no desktop (5.7k vs 6.7k px) e ~12% no celular.
+
+### Sobre a versão enxuta (AP0229)
+
+Feita a partir da CA0001 para quem abre o link direto do WhatsApp, com menos seções e o contato sempre a um toque:
+
+- **saíram** o preloader (a página abre direto), o menu e o burger (o nav é só logo + WhatsApp), o marquee, a intro, o vídeo e o mapa;
+- o **hero** ganhou uma frase curta e o botão de WhatsApp já na primeira tela;
+- a descrição e o endereço entraram na **ficha**, e o endereço virou uma linha com link para o Google Maps;
+- a barra fixa só aparece depois do hero (que já tem o próprio botão) e recolhe na seção da consultora.
+
+Resultado: 3,9k px no desktop, contra 5,7k da CA0001.
 
 ## Estrutura
 

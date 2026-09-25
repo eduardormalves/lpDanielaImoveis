@@ -1,0 +1,181 @@
+<%
+const waIcon = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 18.3c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.3 8.3 0 1 1 12 20.3"/></svg>';
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+// ícones dos destaques (traço fino, mesma caixa 24×24)
+const icones = {
+  key:      '<path d="M14.5 9.5a4.5 4.5 0 1 0-4.2 4.5L6 18.3V21h2.7v-2h2v-2h2l1.2-1.2"/><circle cx="16" cy="8" r="1"/>',
+  furniture:'<path d="M4 11V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M3 11h18v6H3zM6 17v3M18 17v3"/>',
+  oven:     '<path d="M4 3h16v18H4zM4 8h16M7 5.5h.01M10 5.5h.01M7 11h10v7H7z"/>',
+  air:      '<path d="M3 5h18v7H3zM6 9h12M8 15v3M12 15v5M16 15v3"/>',
+  grill:    '<path d="M4 10h16a8 8 0 0 1-16 0zM8 17l-2 4M16 17l2 4M9 3c0 1.5 1 1.5 1 3M13 3c0 1.5 1 1.5 1 3"/>',
+  view:     '<path d="M3 21h18M5 21V10h4v11M11 21V4h5v17M18 21v-8h2v8"/>',
+};
+const icone = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${icones[k] || icones.key}</svg>`;
+const enderecoCompleto = imovel.endereco + ', ' + imovel.bairro + ', ' + imovel.cidade + ' - ' + imovel.uf;
+%><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= imovel.edificio %> · <%= imovel.area %> m² · <%= imovel.corretora.nome %></title>
+  <meta name="description" content="<%= imovel.descricao %>">
+  <meta property="og:title" content="<%= imovel.titulo %>">
+  <meta property="og:description" content="<%= imovel.subtitulo %>">
+  <meta property="og:image" content="<%= asset(imovel.capa) %>">
+  <link rel="icon" href="<%= imovel.corretora.logoMark %>">
+  <link rel="preload" as="image" href="<%= asset(imovel.capa) %>" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<%= base %>/css/style.css">
+</head>
+<body>
+
+  <!-- ===== CURSOR ===== -->
+  <div class="cursor" id="cursor"><div class="cursor__dot"></div><div class="cursor__ring"></div></div>
+
+  <!-- ===== NAV (só logo + WhatsApp) ===== -->
+  <nav class="nav" id="nav">
+    <a href="#top" class="nav__logo"><img src="<%= imovel.corretora.logoWhite %>" alt="<%= imovel.corretora.nome %>"></a>
+    <a href="<%= waLink %>" target="_blank" rel="noopener" class="nav__cta" data-hover><%- waIcon %> <span>Falar no WhatsApp</span></a>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" id="top">
+    <div class="hero__bg"><img src="<%= asset(imovel.capa) %>" alt="" id="heroImg" fetchpriority="high"></div>
+    <div class="hero__grain"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Ref. <%= imovel.codigo %> · <%= imovel.bairro %>, <%= imovel.cidade %></p>
+      <h1 class="hero__title">
+        <span class="line"><span>Gloria</span></span>
+        <span class="line line--em"><span><em>Residence</em></span></span>
+      </h1>
+      <p class="hero__lead">Nunca habitado, com planejados completos e pronto para morar.</p>
+      <div class="hero__meta">
+        <div class="hero__meta-item"><span><%= imovel.area %></span><small>m² privativos</small></div>
+        <div class="hero__meta-item"><span><%= imovel.quartos %></span><small>quartos</small></div>
+        <div class="hero__meta-item"><span><%= imovel.vagas %></span><small>vagas</small></div>
+        <div class="hero__meta-item hero__meta-item--price"><span><%= imovel.precoFormatado %></span><small>valor de venda</small></div>
+      </div>
+      <div class="hero__actions">
+        <a href="<%= waLink %>" target="_blank" rel="noopener" class="btn-solid btn-solid--lg" data-hover><%- waIcon %> Quero saber mais</a>
+        <a href="#galeria" class="btn-line" data-hover><span>Ver as fotos</span><%- arrow %></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== GALERIA EM LOOP ===== -->
+  <section class="hgal" id="galeria">
+    <div class="hgal__head">
+      <p class="eyebrow" data-reveal>Ambientes</p>
+      <h2 data-reveal>Deslize pelo <em>apartamento</em></h2>
+    </div>
+    <div class="hgal__viewport">
+      <!-- as fotos são duplicadas para o loop ser contínuo; a 2ª cópia é escondida de leitores de tela -->
+      <div class="hgal__track" id="hgalTrack">
+        <% [...imovel.fotos, ...imovel.fotos].forEach((f, i) => { const n = i % imovel.fotos.length; %>
+          <figure class="hgal__item" data-hover="view" data-index="<%= n %>"<%- i >= imovel.fotos.length ? ' aria-hidden="true"' : '' %>>
+            <img src="<%= asset(f.src) %>" alt="<%= i >= imovel.fotos.length ? '' : f.alt %>" loading="lazy" draggable="false">
+            <figcaption><span><%= String(n + 1).padStart(2, '0') %></span><%= f.titulo %></figcaption>
+          </figure>
+        <% }) %>
+      </div>
+      <p class="hgal__hint" aria-hidden="true">Arraste para acelerar · toque na foto para ampliar</p>
+    </div>
+  </section>
+
+  <!-- ===== FICHA + DESTAQUES ===== -->
+  <section class="ficha" id="ficha">
+    <div class="ficha__head">
+      <div>
+        <p class="eyebrow" data-reveal>O imóvel</p>
+        <h2 class="lines-reveal">Tudo novo, completo<br>e <em>pronto para morar</em>.</h2>
+      </div>
+      <p class="ficha__desc" data-reveal><%= imovel.descricao %></p>
+    </div>
+
+    <div class="specs__grid">
+      <div class="spec" data-reveal><b><%= imovel.area %></b><small>m² privativos</small></div>
+      <div class="spec" data-reveal><b><%= imovel.quartos %></b><small>quartos</small></div>
+      <div class="spec" data-reveal><b><%= imovel.suites %></b><small>suíte</small></div>
+      <div class="spec" data-reveal><b><%= imovel.banheiros %></b><small>banheiros</small></div>
+      <div class="spec" data-reveal><b><%= imovel.vagas %></b><small>vagas</small></div>
+    </div>
+
+    <ul class="destaques">
+      <% imovel.destaques.forEach((d) => { %>
+        <li class="destaque" data-reveal>
+          <i class="destaque__ico" aria-hidden="true"><%- icone(d.icone) %></i>
+          <h3><%= d.titulo %></h3>
+          <p><%= d.texto %></p>
+        </li>
+      <% }) %>
+    </ul>
+
+    <a class="ficha__local" data-reveal data-hover href="https://www.google.com/maps/search/?api=1&query=<%= encodeURIComponent(enderecoCompleto) %>" target="_blank" rel="noopener">
+      <small>Localização</small>
+      <span><%= imovel.endereco %> · <%= imovel.bairro %>, <%= imovel.cidade %></span>
+      <%- arrow %>
+    </a>
+  </section>
+
+  <!-- ===== CONSULTORA + CTA FINAL ===== -->
+  <section class="final" id="consultora">
+    <div class="final__photo" data-reveal>
+      <img src="<%= imovel.corretora.foto %>" srcset="<%= imovel.corretora.fotoSrcset %>" sizes="(max-width: 860px) 400px, 600px"
+           width="<%= imovel.corretora.fotoW %>" height="<%= imovel.corretora.fotoH %>"
+           alt="<%= imovel.corretora.pessoa %>, consultora imobiliária" loading="lazy" decoding="async">
+    </div>
+    <div class="final__content">
+      <p class="eyebrow" data-reveal>Quem apresenta este imóvel</p>
+      <h2 class="lines-reveal">Agende sua visita<br>com a Daniela.</h2>
+      <div class="final__who" data-reveal>
+        <div class="final__stat"><b><%= imovel.corretora.anos %></b><span>anos no alto padrão<br>residencial</span></div>
+        <div class="final__name"><b><%= imovel.corretora.pessoa %></b><span><%= imovel.corretora.tagline %></span></div>
+      </div>
+      <p class="final__bio" data-reveal><%= imovel.corretora.bio %></p>
+      <div class="final__actions" data-reveal>
+        <a href="<%= whatsapp('Olá, Daniela! Quero agendar uma visita ao apartamento no ' + imovel.edificio + ' (' + imovel.codigo + ').') %>" target="_blank" rel="noopener" class="btn-solid btn-solid--lg" data-hover><%- waIcon %> Agendar pelo WhatsApp</a>
+        <span><%= imovel.corretora.telefone %><small><%= imovel.corretora.creci %></small></span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <img src="<%= imovel.corretora.logoWhite %>" alt="<%= imovel.corretora.nome %>">
+    <p class="footer__tag"><%= imovel.corretora.tagline %> · <%= imovel.corretora.experiencia %></p>
+    <p><%= imovel.corretora.nome %> · <%= imovel.corretora.creci %> · <%= imovel.corretora.telefone %></p>
+    <small>Ref. <%= imovel.codigo %> · Imagens meramente ilustrativas · Valores sujeitos a alteração.</small>
+  </footer>
+
+  <!-- ===== LIGHTBOX (galeria) ===== -->
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Foto ampliada" aria-hidden="true">
+    <button class="lb__close" id="lbClose" aria-label="Fechar" data-hover>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <button class="lb__nav lb__nav--prev" id="lbPrev" aria-label="Foto anterior" data-hover>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+    </button>
+    <figure class="lb__fig" id="lbFig">
+      <img id="lbImg" src="" alt="" draggable="false">
+      <figcaption><span id="lbIdx"></span><em id="lbCap"></em></figcaption>
+    </figure>
+    <button class="lb__nav lb__nav--next" id="lbNext" aria-label="Próxima foto" data-hover>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+
+  <!-- ===== BARRA FIXA ===== -->
+  <div class="stickybar" id="stickybar">
+    <div class="stickybar__info">
+      <strong><%= imovel.precoFormatado %></strong>
+      <span><%= imovel.area %> m² · <%= imovel.quartos %> quartos<i class="stickybar__more"> · <%= imovel.vagas %> vagas</i></span>
+    </div>
+    <a href="<%= waLink %>" target="_blank" rel="noopener" class="btn-solid" data-hover><%- waIcon %> WhatsApp</a>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="<%= base %>/js/main.js" defer></script>
+</body>
+</html>
