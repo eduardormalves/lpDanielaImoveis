@@ -16,6 +16,7 @@ const tour = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include('../../views/partials/google-tag') -%>
   <title><%= imovel.edificio %> · <%= imovel.area %> m² · <%= imovel.corretora.nome %></title>
   <meta name="description" content="<%= imovel.descricao %>">
   <meta property="og:title" content="<%= imovel.titulo %>">

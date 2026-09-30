@@ -58,10 +58,11 @@ landings.forEach((lp) => {
 });
 
 // Raiz: página neutra (logo + contato), sem listar imóveis
-const indexHtml = ejs.render(fs.readFileSync(path.join(ROOT, 'views', 'index.ejs'), 'utf8'), {
-  corretora,
-  waLink: whatsapp('Olá, Daniela! Gostaria de mais informações.'),
-});
+const indexHtml = ejs.render(
+  fs.readFileSync(path.join(ROOT, 'views', 'index.ejs'), 'utf8'),
+  { corretora, waLink: whatsapp('Olá, Daniela! Gostaria de mais informações.') },
+  { filename: path.join(ROOT, 'views', 'index.ejs') }
+);
 write(path.join(DIST, 'index.html'), rebase(indexHtml));
 
 // Evita o Jekyll do GitHub Pages ignorar arquivos
